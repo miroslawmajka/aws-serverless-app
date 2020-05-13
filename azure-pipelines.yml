@@ -1,7 +1,6 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# TODO: create CI pipelines (unit tests and local selenium tests)
+
+# TODO: create CD pipelines for deploying to S3, Lambda, API Gateway and Route 53 with 3 environments (qa, staging production) and tested end-to-end
 
 trigger:
 - master
