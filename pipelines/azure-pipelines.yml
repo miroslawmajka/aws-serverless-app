@@ -2,8 +2,7 @@
 
 # TODO: create CD pipelines for deploying to S3, Lambda, API Gateway and Route 53 with 3 environments (qa, staging production) and tested end-to-end
 
-trigger:
-- master
+trigger: none
 
 pool:
   vmImage: 'ubuntu-latest'
