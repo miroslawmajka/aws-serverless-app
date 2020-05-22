@@ -13,7 +13,7 @@ terraform apply "poc.tfplan"
 
 This will create the environment giving you the S3 bucket URL to access the website.
 
-The bring the environment down run the following command:
+To bring the environment down run the following command:
 ```
 terraform destroy -auto-approve
 terraform workspace select default
