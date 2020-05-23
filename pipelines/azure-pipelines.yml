@@ -39,17 +39,16 @@ steps:
 
 - script: |    
     terraform init -backend-config="aws-s3-backend.tfconfig"
-  displayName: Run Terraform init
+    terraform validate
+    terraform workspace new poc
+    terraform plan -out poc.tfplan
+    terraform apply "poc.tfplan"
+  displayName: Run Terraform POC environment
   workingDirectory: terraform
   env: 
     AWS_ACCESS_KEY_ID: $(aws_access_key_id)
     AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
     AWS_DEFAULT_REGION: $(region)
-
-- script: |    
-    terraform validate
-  displayName: Run Terraform validate
-  workingDirectory: terraform
   
 # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
 #   displayName: 'Terraform : aws'
