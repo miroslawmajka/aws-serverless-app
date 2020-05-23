@@ -25,12 +25,20 @@ steps:
 
 - task: DownloadSecureFile@1
   name: "tfconfig"
-  displayName: 'Downlaod secure S3 backend tfconfig file'
+  displayName: 'Downlaod secure aws-s3-backend.tfconfig file'
   inputs:
     secureFile: aws-s3-backend.tfconfig
 
+- task: DownloadSecureFile@1
+  name: "tfvars"
+  displayName: 'Downlaod secure terraform.tfvars file'
+  inputs:
+    secureFile: terraform.tfvars
+
 - script: |
     cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
+    cp $(tfvars.secureFilePath) terraform/terraform.tfvars
+  displayName: Copy secure files to terraform directory
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: 'Install Terraform 0.12.25'
@@ -40,9 +48,8 @@ steps:
 - script: |    
     terraform init -backend-config="aws-s3-backend.tfconfig"
     terraform validate
-    terraform workspace new poc
-    terraform plan -out poc.tfplan
-    terraform apply "poc.tfplan"
+    terraform plan -out default.tfplan
+    terraform apply "default.tfplan"
   displayName: Run Terraform POC environment
   workingDirectory: terraform
   env: 
