@@ -16,7 +16,16 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-  
+
+- task: DownloadSecureFile@1
+  name: "tfconfig"
+  displayName: 'Downlaod secure S3 backend tfconfig file'
+  inputs:
+    secureFile: aws-s3-backend.tfconfig
+
+- script: |
+    cp $(tfconfig.secureFilePath) terraform
+
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: 'Install Terraform 0.12.25'
   
