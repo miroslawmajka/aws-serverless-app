@@ -11,6 +11,9 @@ pool:
 workspace:
   clean: all
 
+variables:
+- group: AwsCredentials
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -27,12 +30,17 @@ steps:
     secureFile: aws-s3-backend.tfconfig
 
 - script: |
-    cp $(tfconfig.secureFilePath) terraform
+    cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: 'Install Terraform 0.12.25'
   inputs:
     terraformVersion: 0.12.25
+
+- script: |    
+    terraform init -backend-config="aws-s3-backend.tfconfig"
+  displayName: Run Terraform init
+  workingDirectory: terraform
 
 - script: |    
     terraform validate
