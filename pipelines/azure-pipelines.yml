@@ -30,8 +30,11 @@ steps:
     secureFile: aws-s3-backend.tfconfig
 
 - script: |
-    echo $(aws_access_key_id)
+    echo From group: $(aws_access_key_id)
+    echo From env: $aws_access_key_id
     cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
+  env: 
+    aws_access_key_id: $(aws_access_key_id)
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: 'Install Terraform 0.12.25'
