@@ -13,8 +13,12 @@ terraform {
 ###############################
 
 # The AWS S3 static website bucket with workspace/environment name appended
-resource "aws_s3_bucket" "website-bucket" {
-  bucket = "aws-serverless-app-${terraform.workspace}"
+resource "aws_s3_bucket" "website_bucket" {
+  bucket = "${var.bucket_prefix}-aws-serverless-app-${terraform.workspace}"
+}
+
+resource "aws_s3_bucket" "lambda_deployments_bucket" {
+  bucket = "${var.bucket_prefix}-deployments"
 }
 
 # TODO: use terraform random provider to randomize the bucket name as they need to be globally unique

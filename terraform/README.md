@@ -2,7 +2,9 @@
 
 Make a copy of `aws-s3-backend.tfconfig.example` and name it `aws-s3-backend.tfconfig`. 
 
-Fill in the values in the new file and run the following commands to create the "poc" (proof of concept) environment:
+Make a copy of `terraform.tfvars.example` and name it `terraform.tfvars`.
+
+Fill in the values in the new files and run the following commands to create the "poc" (proof of concept) environment:
 
 ```
 terraform init -backend-config="aws-s3-backend.tfconfig"

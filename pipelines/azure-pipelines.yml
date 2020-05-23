@@ -2,7 +2,8 @@
 
 # TODO: create CD pipelines for deploying to S3, Lambda, API Gateway and Route 53 with 3 environments (qa, staging production) and tested end-to-end
 
-trigger: none
+trigger: 
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,3 +16,6 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+  
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+  displayName: 'Install Terraform 0.12.3'
