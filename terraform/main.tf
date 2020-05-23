@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "website_bucket" {
 }
 
 resource "aws_s3_bucket" "lambda_deployments_bucket" {
-  bucket = "${var.bucket_prefix}-deployments"
+  bucket = "${var.bucket_prefix}-deployments-${terraform.workspace}"
 }
 
 # TODO: use terraform random provider to randomize the bucket name as they need to be globally unique
