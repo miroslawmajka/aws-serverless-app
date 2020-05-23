@@ -37,7 +37,7 @@ steps:
 - script: |    
     terraform validate
   displayName: Run Terraform validate
-  workingDirectory: $(Build.SourcesDirectory/terraform
+  workingDirectory: terraform
   
 # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
 #   displayName: 'Terraform : aws'
