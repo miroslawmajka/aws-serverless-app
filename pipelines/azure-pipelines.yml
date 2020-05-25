@@ -8,15 +8,12 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-workspace:
-  clean: all
-
-variables:
-- group: AwsCredentials
-
 stages:
 - stage: BuildAwsInfrastrcture
   displayName: Build AWS Infrastrcture
+
+  variables:
+    - group: AwsCredentials
 
   jobs:
   - job: RunTerraform
