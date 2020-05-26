@@ -66,7 +66,7 @@ resource "aws_s3_bucket_object" "lambda_dummy_python_object" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name               = "lambdaRole-${terraform.workspace}"
+  name               = "lambda-role-${terraform.workspace}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -84,8 +84,8 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
-resource "aws_lambda_function" "lambda_dummy_node_function" {
-  function_name = "aws-serverless-app-${terraform.workspace}-node-function"
+resource "aws_lambda_function" "lambda_node_function" {
+  function_name = "aws-serverless-app-node-function-${terraform.workspace}"
   runtime       = "nodejs12.x"
   handler       = "index.handler"
   role          = aws_iam_role.iam_for_lambda.arn
@@ -94,8 +94,8 @@ resource "aws_lambda_function" "lambda_dummy_node_function" {
   depends_on    = [aws_s3_bucket_object.lambda_dummy_node_object]
 }
 
-resource "aws_lambda_function" "lambda_dummy_python_function" {
-  function_name = "aws-serverless-app-${terraform.workspace}-python-function"
+resource "aws_lambda_function" "lambda_python_function" {
+  function_name = "aws-serverless-app-python-function-${terraform.workspace}"
   runtime       = "python3.8"
   handler       = "main.handler"
   role          = aws_iam_role.iam_for_lambda.arn

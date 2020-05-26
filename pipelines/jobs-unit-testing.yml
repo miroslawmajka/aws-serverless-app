@@ -1,0 +1,16 @@
+jobs:
+- job: UnitTestNodeFunctions
+  displayName: Unit Test Node Functions
+
+  steps:
+  - script: |
+      echo "TODO: npm install, npm run lint, npm test"
+    displayName: Run install, lint, test
+
+- job: UnitTestPythonFunctions
+  displayName: Unit Test Python Functions
+
+  steps:
+  - script: |
+      echo "TODO: restore requirements and run unit tests"
+    displayName: Restore requirements and run unit tests
