@@ -29,7 +29,7 @@ jobs:
   - script: |    
       terraform init -backend-config="aws-s3-backend.tfconfig"
       terraform validate
-      terraform workspace new $(DYNAMIC_ENV_NAME)
+      sh select-workspace.sh $(DYNAMIC_ENV_NAME)
       terraform plan -out $(DYNAMIC_ENV_NAME).tfplan
       terraform apply "$(DYNAMIC_ENV_NAME).tfplan"
     displayName: Create $(DYNAMIC_ENV_NAME) environment

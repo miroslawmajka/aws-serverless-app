@@ -28,7 +28,7 @@ jobs:
 
   - script: |    
       terraform init -backend-config="aws-s3-backend.tfconfig"
-      terraform workspace select $(DYNAMIC_ENV_NAME)
+      sh select-workspace.sh $(DYNAMIC_ENV_NAME)
       terraform destroy -auto-approve
       terraform workspace select default
       terraform workspace delete $(DYNAMIC_ENV_NAME)
