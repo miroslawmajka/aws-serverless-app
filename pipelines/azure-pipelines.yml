@@ -53,7 +53,7 @@ stages:
         terraform workspace new $(DYNAMIC_ENV_NAME)
         terraform plan -out $(DYNAMIC_ENV_NAME).tfplan
         terraform apply "$(DYNAMIC_ENV_NAME).tfplan"
-      displayName: Create default environment
+      displayName: Create $(DYNAMIC_ENV_NAME) environment
       workingDirectory: terraform
       env: 
         AWS_ACCESS_KEY_ID: $(aws_access_key_id)
@@ -123,11 +123,12 @@ stages:
           terraformVersion: 0.12.25
   
       - script: |    
+          terraform init -backend-config="aws-s3-backend.tfconfig"
           terraform workspace select $(DYNAMIC_ENV_NAME)
           terraform destroy -auto-approve
           terraform workspace select default
           terraform workspace delete $(DYNAMIC_ENV_NAME)
-        displayName: Destroy default environment
+        displayName: Destroy $(DYNAMIC_ENV_NAME) environment
         workingDirectory: terraform
         env: 
           AWS_ACCESS_KEY_ID: $(aws_access_key_id)
