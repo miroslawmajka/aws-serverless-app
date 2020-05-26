@@ -43,7 +43,7 @@ stages:
 
     # Third-party task from the Marketplace
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-      displayName: 'Install Terraform'
+      displayName: Install Terraform
       inputs:
         terraformVersion: 0.12.25
 
@@ -59,16 +59,6 @@ stages:
         AWS_ACCESS_KEY_ID: $(aws_access_key_id)
         AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
         AWS_DEFAULT_REGION: $(region)   
-
-    # TODO: this works in Releases but not in Pipelines
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-    #   displayName: 'Terraform : aws'
-    #   inputs:
-    #     provider: aws
-    #     workingDirectory: '$(Build.SourcesDirectory/terraform'
-    #     backendServiceAWS: 'mirek-aws'
-    #     backendAWSBucketName: 'miroslawmajka-tfstate'
-    #     backendAWSKey: tfstate.json
 
 - stage: UnitTestLambdaFunctions
   displayName: Unit Test Lambda Functions
@@ -118,7 +108,7 @@ stages:
   
       # Third-party task from the Marketplace
       - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-        displayName: 'Install Terraform'
+        displayName: Install Terraform
         inputs:
           terraformVersion: 0.12.25
   

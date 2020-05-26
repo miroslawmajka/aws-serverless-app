@@ -66,7 +66,7 @@ resource "aws_s3_bucket_object" "lambda_dummy_python_object" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name               = "iam_for_lambda"
+  name               = "lambdaRole-${terraform.workspace}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
