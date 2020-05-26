@@ -16,6 +16,51 @@ variables:
   value: $(Build.SourceBranchName)-$(Build.BuildID)
 
 stages:
+- stage: UnitTestLambdaFunctions
+  displayName: Unit Test Lambda Functions
+
+  jobs:
+    - job: UnitTestNodeFunction
+      displayName: Unit Test Node Function
+
+      steps:
+      - script: |
+          echo "TODO: npm install, npm run lint, npm test"
+        displayName: Run install, lint, test
+
+    - job: UnitTestPythonFunction
+      displayName: Unit Test Python Function
+
+      steps:
+      - script: |
+          echo "TODO: restore requirements and run uni tests"
+        displayName: Restore requirements and run unit tests
+
+- stage: DeployAppInAws
+  displayName: Deploy App in AWS
+
+  jobs:
+  - job: DeployWebsite
+    displayName: Deploy Website
+
+    steps:
+    - script: |
+        echo "TODO: copy website static files to the S3 bucket"
+      displayName: Upload static website files to S3 bucket
+
+    - script: |
+        echo "TODO: update the env.json to point to the right API Gateway URL"
+      displayName: Update the env.json file
+
+  - job: DeployLambdas
+    displayName: Deploy Lambdas
+
+    steps:
+
+    - script: |
+        echo "TODO: npm install --production, zip files, upload to S3 bucket and deploy to Lambda"
+      displayName: Deploy latest code to Lambda
+
 - stage: BuildAwsInfrastrcture
   displayName: Build AWS Infrastrcture
 
@@ -60,28 +105,8 @@ stages:
         AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
         AWS_DEFAULT_REGION: $(region)   
 
-- stage: UnitTestLambdaFunctions
-  displayName: Unit Test Lambda Functions
-
-  jobs:
-    - job: UnitTestNodeFunction
-      displayName: Unit Test Node Function
-
-      steps:
-      - script: |
-          echo "TODO: npm install, npm run lint, npm test"
-        displayName: Run install, lint, test
-
-    - job: UnitTestPythonFunction
-      displayName: Unit Test Python Function
-
-      steps:
-      - script: |
-          echo "TODO: restore requirements and run uni tests"
-        displayName: Restore requirements and run unit tests
-
-- stage: DstroyAwsInfrastructure
-  displayName: Dstroy AWS Infrastructure
+- stage: DestroyAwsInfrastructure
+  displayName: Destroy AWS Infrastructure
   condition: always()
 
   jobs:
