@@ -15,7 +15,7 @@ stages:
   displayName: Deploy App
 
   jobs:
-  - temlate: jobs-deploy-app.yml
+  - template: jobs-deploy-app.yml
 
 - stage: AwsCleanup
   displayName: AWS Cleanup
