@@ -13,7 +13,7 @@ pool:
 variables:
 - group: AwsCredentials
 - name: DYNAMIC_ENV_NAME
-  value: $(Build.SourceBranchName)-$(Build.BuildID)-$(Date:yyyy-MM-dd-HH-mm)
+  value: $(Build.SourceBranchName)-$(Build.BuildID)
 
 stages:
 - stage: BuildAwsInfrastrcture
