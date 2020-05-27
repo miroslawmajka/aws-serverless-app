@@ -27,7 +27,7 @@ data "archive_file" "lambda_dummy_node_zip" {
   type        = "zip"
   output_path = "/tmp/lambda-dummy-node.zip"
   source {
-    content  = file("dummy-lambda/node/index.js")
+    content  = file("${path.root}/dummy-lambda/node/index.js")
     filename = "index.js"
   }
 }
@@ -36,7 +36,7 @@ data "archive_file" "lambda_dummy_python_zip" {
   type        = "zip"
   output_path = "/tmp/lambda-dummy-python.zip"
   source {
-    content  = file("dummy-lambda/python/main.py")
+    content  = file("${path.root}/dummy-lambda/python/main.py")
     filename = "main.py"
   }
 }

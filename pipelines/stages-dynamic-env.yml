@@ -16,10 +16,16 @@ stages:
 
 #   jobs:
 #   - template: jobs-deploy-app.yml
-
-# - stage: AwsCleanup
-#   displayName: AWS Cleanup
-#   condition: always()
+      
+# - stage: TestApp
+#   displayName: Test App
 
 #   jobs:
-#   - template: jobs-destroy-aws-infrastructure.yml
+#   - template: jobs-test-app.yml
+
+- stage: AwsCleanup
+  displayName: AWS Cleanup
+  condition: always()
+
+  jobs:
+  - template: jobs-destroy-aws-infrastructure.yml
