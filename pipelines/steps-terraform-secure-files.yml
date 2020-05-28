@@ -1,23 +1,23 @@
  steps:
-- task: DownloadSecureFile@1
-  name: "tfconfig"
-  displayName: 'Downlaod secure aws-s3-backend.tfconfig file'
-  inputs:
-    secureFile: aws-s3-backend.tfconfig
+  - task: DownloadSecureFile@1
+    name: "tfconfig"
+    displayName: 'Downlaod secure aws-s3-backend.tfconfig file'
+    inputs:
+      secureFile: aws-s3-backend.tfconfig
 
-- task: DownloadSecureFile@1
-  name: "tfvars"
-  displayName: 'Downlaod secure terraform.tfvars file'
-  inputs:
-    secureFile: terraform.tfvars
+  - task: DownloadSecureFile@1
+    name: "tfvars"
+    displayName: 'Downlaod secure terraform.tfvars file'
+    inputs:
+      secureFile: terraform.tfvars
 
-- script: |
-    cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
-    cp $(tfvars.secureFilePath) terraform/terraform.tfvars
-  displayName: Copy secure files to terraform directory
+  - script: |
+      cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
+      cp $(tfvars.secureFilePath) terraform/terraform.tfvars
+    displayName: Copy secure files to terraform directory
 
-# Third-party task from the Marketplace
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-  displayName: Install Terraform
-  inputs:
-    terraformVersion: 0.12.25
+  # Third-party task from the Marketplace
+  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    displayName: Install Terraform
+    inputs:
+      terraformVersion: 0.12.25
