@@ -1,0 +1,23 @@
+jobs:
+- job: TestWebsiteSelenium
+  displayName: Test with Selenium
+
+  steps:
+  - script: |
+      echo "TODO: run WebdriverIO"
+    displayName: Run WebdriverIO Tests
+
+- job: TestWebsiteCypress
+  displayName: Test with Cypress
+
+  steps:
+  - script: |
+      echo "TODO: run Cypress"
+
+- job: TestApi
+  displayName: TestApi
+
+  steps:
+  - script: |
+      echo "TODO: run newman collection against the API"
+    displayName: Test with Postman
