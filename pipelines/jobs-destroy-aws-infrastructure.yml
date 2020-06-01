@@ -11,9 +11,16 @@ jobs:
       terraform destroy -auto-approve
       terraform workspace select default
       terraform workspace delete $(DYNAMIC_ENV_NAME)
+      mkdir -p $(Pipeline.Workspace)/variables
+      terraform output website_bucket_name > $(Pipeline.Workspace)/terraform-variables/website_bucket_name
+      terraform output serverless_rest_api_base_url >> $(Pipeline.Workspace)/terraform-variables/serverless_rest_api_base_url
+      terraform output website_url > $(Pipeline.Workspace)/terraform-variables/website_url
     displayName: Destroy $(DYNAMIC_ENV_NAME) environment
     workingDirectory: terraform
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
       AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
       AWS_DEFAULT_REGION: $(region)     
+
+  - publish: $(Pipeline.Workspace)/terraform-variables
+    artifact: terraform-variables

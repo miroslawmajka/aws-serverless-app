@@ -2,10 +2,20 @@ jobs:
 - job: DeployWebsite
   displayName: Deploy Website
 
-  steps:
+  steps:  
+  - download: current
+    artifact: terraform-variables
+
+  # TODO: install AWS CLI here
+
   - script: |
-      echo "TODO: copy website static files to the S3 bucket"
+      BUCKET_NAME=$(cat $(Pipeline.Workspace)/variables/website_bucket_name)
+      aws s3 cp website/ s3://BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
+    env: 
+      AWS_ACCESS_KEY_ID: $(aws_access_key_id)
+      AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
+      AWS_DEFAULT_REGION: $(region)   
 
   - script: |
       echo "TODO: update the env.json to point to the right API Gateway URL"
