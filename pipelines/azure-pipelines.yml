@@ -11,9 +11,9 @@ variables:
 - name: DYNAMIC_ENV_NAME
   value: dynamic-env-$(Build.BuildID)
 - name: ARTIFACT_NAME
-  value: terraform-variables
+  value: terraform-variables.txt
 - name: ARTIFACT_PATH
-  value: $(Pipeline.Workspace)/$(ARTIFACT_NAME)
-  
+  value: $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)
+
 stages:
 - template: stages-dynamic-env.yml

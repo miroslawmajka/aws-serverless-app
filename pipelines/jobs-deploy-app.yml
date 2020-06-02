@@ -5,7 +5,6 @@ jobs:
   - task: DownloadBuildArtifacts@0
     inputs:
       artifactName: $(ARTIFACT_NAME)
-      # downloadPath: $(ARTIFACT_PATH)
 
   - script: |
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -15,9 +14,11 @@ jobs:
     displayName: Install AWS CLI 2
 
   - script: |
-      BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_bucket_name)
-      API_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/serverless_rest_api_base_url)
-      WEBSITE_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_url)
+# BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_bucket_name)
+# API_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/serverless_rest_api_base_url)
+# WEBSITE_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_url)
+
+      source $(ARTIFACT_PATH)
 
       aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
