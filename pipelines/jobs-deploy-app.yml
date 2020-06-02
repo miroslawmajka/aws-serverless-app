@@ -1,17 +1,18 @@
 jobs:
 - job: DeployWebsite
   displayName: Deploy Website
-
   steps:  
-  - download: current
-    artifact: terraform-variables
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: $(ARTIFACT_NAME)
+      path: $(ARTIFACT_PATH)
 
   # TODO: install AWS CLI here
 
   - script: |
-      BUCKET_NAME=$(cat $(Pipeline.Workspace)/variables/website_bucket_name)
-      API_URL=$(cat $(Pipeline.Workspace)/variables/serverless_rest_api_base_url)
-      WEBSITE_URL=$(cat $(Pipeline.Workspace)/variables/website_url)
+      BUCKET_NAME=$(cat $(ARTIFACT_PATH)/website_bucket_name)
+      API_URL=$(cat $(ARTIFACT_PATH)/serverless_rest_api_base_url)
+      WEBSITE_URL=$(cat $(ARTIFACT_PATH)/website_url)
 
       echo $BUCKET_NAME
       echo $API_URL
@@ -27,10 +28,9 @@ jobs:
       echo "TODO: update the env.json to point to the right API Gateway URL"
     displayName: Update the env.json file
 
-- job: DeployLambdaFunctions
-  displayName: Deploy Lambda Functions
-
-  steps:
-  - script: |
-      echo "TODO: npm install --production, zip files, upload to S3 bucket and deploy to Lambda"
-    displayName: Deploy latest code to Lambda
+# - job: DeployLambdaFunctions
+#   displayName: Deploy Lambda Functions
+#   steps:
+#   - script: |
+#       echo "TODO: npm install --production, zip files, upload to S3 bucket and deploy to Lambda"
+#     displayName: Deploy latest code to Lambda

@@ -10,6 +10,10 @@ variables:
 - group: AwsCredentials
 - name: DYNAMIC_ENV_NAME
   value: dynamic-env-$(Build.BuildID)
-
+- name: ARTIFACT_NAME
+  value: terraform-variables
+- name: ARTIFACT_PATH
+  value: $(Pipeline.Workspace)/$(ARTIFACT_NAME)
+  
 stages:
 - template: stages-dynamic-env.yml
