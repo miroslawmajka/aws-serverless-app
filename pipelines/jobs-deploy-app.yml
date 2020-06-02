@@ -2,7 +2,7 @@ jobs:
 - job: DeployWebsite
   displayName: Deploy Website
   steps:  
-  - template: sptes-install-aws-cli.yml
+  - template: steps-install-aws-cli.yml
 
   - task: DownloadBuildArtifacts@0
     inputs:
