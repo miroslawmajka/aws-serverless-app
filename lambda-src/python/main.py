@@ -6,5 +6,5 @@ def handler(event, context):
         'headers': {
             'Access-Control-Allow-Origin': '*'
         },
-        'body': json.dumps('DUMMY PYTHON RESPONSE')
+        'body': json.dumps('Actual Python function')
     }

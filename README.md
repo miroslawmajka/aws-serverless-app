@@ -4,3 +4,11 @@ This is a boilerplate project for an AWS S3 static website with serverless Lambd
 TODO: rebrand the website from W3C, deploy static website S3 bucket with Terraform and provide URL for accessing it
 
 Using the [W3 Schools](https://www.w3schools.com/w3css/w3css_templates.asp) template for a basic website. As their site mentions "You are free to modify, save, share, and use them in all your projects."
+
+# CORS
+
+Testing CORS with jQuery in the website:
+```javascript
+$.get(`${_config.apiUrl}/hello-node`, data => console.log(data));
+$.get(`${_config.apiUrl}/hello-python`, data => console.log(data));
+```

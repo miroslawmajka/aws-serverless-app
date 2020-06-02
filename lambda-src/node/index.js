@@ -1,7 +1,10 @@
 exports.handler = async (event) => {
     const response = {
         statusCode: 200,
-        body: JSON.stringify('DUMMY NODE'),
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify('Actual Node function'),
     };
     return response;
 };
