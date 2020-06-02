@@ -10,27 +10,11 @@ jobs:
       terraform destroy -auto-approve
       terraform workspace select default
       terraform workspace delete $(DYNAMIC_ENV_NAME)
-      mkdir -p $(ARTIFACT_PATH)
-      terraform output website_bucket_name > $(ARTIFACT_PATH)/website_bucket_name
-      terraform output serverless_rest_api_base_url >> $(ARTIFACT_PATH)/serverless_rest_api_base_url
-      terraform output website_url > $(ARTIFACT_PATH)/website_url
-
-      echo "Saved vars"
-      ls $(ARTIFACT_PATH)
-      cat $(ARTIFACT_PATH)/website_bucket_name
-      cat $(ARTIFACT_PATH)/serverless_rest_api_base_url
-      cat $(ARTIFACT_PATH)/website_url
     displayName: Destroy $(DYNAMIC_ENV_NAME) environment
     workingDirectory: terraform
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
       AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
       AWS_DEFAULT_REGION: $(region)     
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish $(ARTIFACT_NAME)
-    inputs:
-      pathToPublish: $(ARTIFACT_PATH)
-      ArtifactName: $(ARTIFACT_NAME)
 
     
