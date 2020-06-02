@@ -1,8 +1,8 @@
 stages:
-- stage: UnitTestLambdaFunctions
-  displayName: Unit Test Lambda Functions
-  jobs:
-  - template: jobs-unit-testing.yml
+# - stage: UnitTestLambdaFunctions
+#   displayName: Unit Test Lambda Functions
+#   jobs:
+#   - template: jobs-unit-testing.yml
 
 - stage: SetupAwsInfrastrcture
   displayName: Setup AWS Infrastrcture
@@ -14,10 +14,10 @@ stages:
   jobs:
   - template: jobs-deploy-app.yml
       
-- stage: TestApp
-  displayName: Test App
-  jobs:
-  - template: jobs-test-app.yml
+# - stage: TestApp
+#   displayName: Test App
+#   jobs:
+#   - template: jobs-test-app.yml
 
 - stage: AwsCleanup
   displayName: AWS Cleanup
