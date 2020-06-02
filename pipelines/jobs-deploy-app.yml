@@ -17,6 +17,10 @@ jobs:
       echo $BUCKET_NAME
       echo $API_URL
       echo $WEBSITE_URL
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      aws --version
 #      aws s3 cp website/ s3://BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
     env: 

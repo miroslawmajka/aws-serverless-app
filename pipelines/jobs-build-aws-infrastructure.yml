@@ -16,12 +16,6 @@ jobs:
       terraform output website_bucket_name > $(ARTIFACT_PATH)/website_bucket_name
       terraform output serverless_rest_api_base_url >> $(ARTIFACT_PATH)/serverless_rest_api_base_url
       terraform output website_url > $(ARTIFACT_PATH)/website_url
-
-      echo "Saved vars"
-      ls $(ARTIFACT_PATH)
-      cat $(ARTIFACT_PATH)/website_bucket_name
-      cat $(ARTIFACT_PATH)/serverless_rest_api_base_url
-      cat $(ARTIFACT_PATH)/website_url
     displayName: Create $(DYNAMIC_ENV_NAME) environment
     workingDirectory: terraform
     env: 
@@ -34,4 +28,3 @@ jobs:
     inputs:
       pathToPublish: $(ARTIFACT_PATH)
       ArtifactName: $(ARTIFACT_NAME)
-      
