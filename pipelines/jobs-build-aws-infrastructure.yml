@@ -1,7 +1,6 @@
 jobs:
 - job: TerraformApply
   displayName: Terraform Apply
-
   steps:
   - template: steps-terraform-secure-files.yml
 
@@ -12,15 +11,11 @@ jobs:
       terraform plan -out $(DYNAMIC_ENV_NAME).tfplan
       terraform apply "$(DYNAMIC_ENV_NAME).tfplan"
 
-      mkdir -p $(ARTIFACT_PATH)
+      mkdir -p $(TF_ARTIFACT_PATH)
 
-      echo BUCKET_NAME=`terraform output website_bucket_name` > $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
-      echo API_URL=`terraform output serverless_rest_api_base_url` >> $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
-      echo WEBSITE_URL=`terraform output website_url` >> $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
-
-# terraform output website_bucket_name > $(ARTIFACT_PATH)/website_bucket_name
-# terraform output serverless_rest_api_base_url > $(ARTIFACT_PATH)/serverless_rest_api_base_url
-# terraform output website_url > $(ARTIFACT_PATH)/website_url
+      echo BUCKET_NAME=`terraform output website_bucket_name` > $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      echo API_URL=`terraform output serverless_rest_api_base_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      echo WEBSITE_URL=`terraform output website_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
     displayName: Create $(DYNAMIC_ENV_NAME) environment
     workingDirectory: terraform
     env: 
@@ -29,7 +24,7 @@ jobs:
       AWS_DEFAULT_REGION: $(region)   
 
   - task: PublishBuildArtifacts@1
-    displayName: Publish $(ARTIFACT_NAME)
+    displayName: Publish $(TF_ARTIFACT_NAME)
     inputs:
-      pathToPublish: $(ARTIFACT_PATH)
-      ArtifactName: $(ARTIFACT_NAME)
+      pathToPublish: $(TF_ARTIFACT_PATH)
+      ArtifactName: $(TF_ARTIFACT_NAME)

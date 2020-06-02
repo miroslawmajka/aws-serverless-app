@@ -2,35 +2,25 @@ jobs:
 - job: DeployWebsite
   displayName: Deploy Website
   steps:  
+  - template: sptes-install-aws-cli.yml
+
   - task: DownloadBuildArtifacts@0
     inputs:
-      artifactName: $(ARTIFACT_NAME)
+      artifactName: $(TF_ARTIFACT_NAME)
 
   - script: |
-      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      unzip awscliv2.zip
-      sudo ./aws/install
-      aws --version
-    displayName: Install AWS CLI 2
+      source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
 
-  - script: |
-      source $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
-
-      ls $(ARTIFACT_PATH)
+      echo "window._config = { apiUrl: '$API_URL' }" > website/config.js
 
       aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
-# BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_bucket_name)
-# API_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/serverless_rest_api_base_url)
-# WEBSITE_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_url)
+
+      echo $WEBSITE_URL
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
       AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
       AWS_DEFAULT_REGION: $(region)   
-
-  - script: |
-      echo "TODO: update the env.json to point to the right API Gateway URL"
-    displayName: Update the env.json file
 
 # - job: DeployLambdaFunctions
 #   displayName: Deploy Lambda Functions

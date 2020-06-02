@@ -10,12 +10,12 @@ variables:
 - group: AwsCredentials
 - name: DYNAMIC_ENV_NAME
   value: dynamic-env-$(Build.BuildID)
-- name: ARTIFACT_NAME
+- name: TF_ARTIFACT_NAME
   value: terraform-variables
-- name: TERRAFORM_OUTPUT_VARS
+- name: TF_OUTPUT_VARS
   value: variables.txt
-- name: ARTIFACT_PATH
-  value: $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)
+- name: TF_ARTIFACT_PATH
+  value: $(System.ArtifactsDirectory)/$(TF_ARTIFACT_NAME)
 
 stages:
 - template: stages-dynamic-env.yml

@@ -125,3 +125,6 @@ terraform.rc
 # version control.
 #
 # example.tfvars
+
+# Website config
+website/config.js
