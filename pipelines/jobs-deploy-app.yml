@@ -2,26 +2,24 @@ jobs:
 - job: DeployWebsite
   displayName: Deploy Website
   steps:  
-  - task: DownloadPipelineArtifact@2
+  - task: DownloadBuildArtifacts@0
     inputs:
-      artifact: $(ARTIFACT_NAME)
-      path: $(ARTIFACT_PATH)
+      artifactName: $(ARTIFACT_NAME)
+      downloadPath: $(ARTIFACT_PATH)
 
-  # TODO: install AWS CLI here
+  - script: |
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      aws --version
+    displayName: Install AWS CLI 2
 
   - script: |
       BUCKET_NAME=$(cat $(ARTIFACT_PATH)/website_bucket_name)
       API_URL=$(cat $(ARTIFACT_PATH)/serverless_rest_api_base_url)
       WEBSITE_URL=$(cat $(ARTIFACT_PATH)/website_url)
 
-      echo $BUCKET_NAME
-      echo $API_URL
-      echo $WEBSITE_URL
-      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      unzip awscliv2.zip
-      sudo ./aws/install
-      aws --version
-#      aws s3 cp website/ s3://BUCKET_NAME/ --recursive --acl public-read
+     aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
