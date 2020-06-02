@@ -14,7 +14,9 @@ jobs:
     displayName: Install AWS CLI 2
 
   - script: |
-      source $(ARTIFACT_PATH)
+      source $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
+
+      ls $(ARTIFACT_PATH)
 
       aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
 # BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_bucket_name)

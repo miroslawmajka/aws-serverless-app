@@ -12,11 +12,12 @@ jobs:
       terraform plan -out $(DYNAMIC_ENV_NAME).tfplan
       terraform apply "$(DYNAMIC_ENV_NAME).tfplan"
 
-      terraform output website_bucket_name > $(ARTIFACT_PATH)
-      terraform output serverless_rest_api_base_url >> $(ARTIFACT_PATH)
-      terraform output website_url >> $(ARTIFACT_PATH)
+      mkdir -p $(ARTIFACT_PATH)
 
-# mkdir -p $(ARTIFACT_PATH)
+      echo BUCKET_NAME=`terraform output website_bucket_name` > $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
+      echo API_URL=`terraform output serverless_rest_api_base_url` >> $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
+      echo WEBSITE_URL=`terraform output website_url` >> $(ARTIFACT_PATH)/$(TERRAFORM_OUTPUT_VARS)
+
 # terraform output website_bucket_name > $(ARTIFACT_PATH)/website_bucket_name
 # terraform output serverless_rest_api_base_url > $(ARTIFACT_PATH)/serverless_rest_api_base_url
 # terraform output website_url > $(ARTIFACT_PATH)/website_url
