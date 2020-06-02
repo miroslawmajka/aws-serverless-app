@@ -15,9 +15,9 @@ jobs:
     displayName: Install AWS CLI 2
 
   - script: |
-      BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/website_bucket_name)
-      API_URL=$(cat $(System.ArtifactsDirectory)/serverless_rest_api_base_url)
-      WEBSITE_URL=$(cat $(System.ArtifactsDirectory)/website_url)
+      BUCKET_NAME=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_bucket_name)
+      API_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/serverless_rest_api_base_url)
+      WEBSITE_URL=$(cat $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/website_url)
 
       aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
