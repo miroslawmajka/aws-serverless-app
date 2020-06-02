@@ -10,7 +10,13 @@ jobs:
 
   - script: |
       BUCKET_NAME=$(cat $(Pipeline.Workspace)/variables/website_bucket_name)
-      aws s3 cp website/ s3://BUCKET_NAME/ --recursive --acl public-read
+      API_URL=$(cat $(Pipeline.Workspace)/variables/serverless_rest_api_base_url)
+      WEBSITE_URL=$(cat $(Pipeline.Workspace)/variables/website_url)
+
+      echo $BUCKET_NAME
+      echo $API_URL
+      echo $WEBSITE_URL
+#      aws s3 cp website/ s3://BUCKET_NAME/ --recursive --acl public-read
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
