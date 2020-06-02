@@ -1,23 +1,21 @@
 jobs:
 - job: TestWebsiteSelenium
-  displayName: Test with Selenium
-
+  displayName: Test App website with Selenium
   steps:
   - script: |
       echo "TODO: run WebdriverIO"
     displayName: Run WebdriverIO Tests
 
 - job: TestWebsiteCypress
-  displayName: Test with Cypress
-
+  displayName: Test App website with Cypress
   steps:
   - script: |
       echo "TODO: run Cypress"
+    displayName: Run Cypress
 
-- job: TestApi
-  displayName: TestApi
-
+- job: TestApiPostman
+  displayName: Test App API with Postman
   steps:
   - script: |
       echo "TODO: run newman collection against the API"
-    displayName: Test with Postman
+    displayName: Run Postman colleciton using Newman
