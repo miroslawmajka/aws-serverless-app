@@ -17,7 +17,7 @@ jobs:
       terraform destroy -auto-approve
       terraform workspace select default
       terraform workspace delete $(DYNAMIC_ENV_NAME)
-      mkdir -p $(Pipeline.Workspace)/variables
+      mkdir -p $(ARTIFACT_PATH)
       terraform output website_bucket_name > $(ARTIFACT_PATH)/website_bucket_name
       terraform output serverless_rest_api_base_url >> $(ARTIFACT_PATH)/serverless_rest_api_base_url
       terraform output website_url > $(ARTIFACT_PATH)/website_url
