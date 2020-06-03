@@ -1,0 +1,17 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "description": "Postman/Newman tests for the API calls in API Gateway / Lambda",
+  "keywords": [
+    "newman",
+    "postman"
+  ],
+  "scripts": {
+    "build-env-file": "node index.js"
+  },
+  "author": "Miroslaw Majka",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

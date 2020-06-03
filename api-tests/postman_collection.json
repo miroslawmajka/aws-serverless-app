@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "dac02736-3948-4cf0-93e7-43992f5f43b1",
+		"name": "AwdServerlessAppApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Node API Gateway Integration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2080f21-6777-4a23-898f-b2c6aa978071",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/hello-node",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"hello-node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Python API Gateway Integration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db563a14-f3c1-43a5-a262-b5893073a23f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/hello-python",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"hello-python"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

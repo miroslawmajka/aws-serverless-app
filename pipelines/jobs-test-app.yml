@@ -1,21 +1,54 @@
 jobs:
-- job: TestWebsiteSelenium
-  displayName: Test App website with Selenium
-  steps:
-  - script: |
-      echo "TODO: run WebdriverIO"
-    displayName: Run WebdriverIO Tests
+# - job: TestWebsiteSelenium
+#   displayName: Test App website with Selenium
+#   steps:
+#   - script: |
+#       echo "TODO: run WebdriverIO"
+#     displayName: Run WebdriverIO Tests
 
-- job: TestWebsiteCypress
-  displayName: Test App website with Cypress
-  steps:
-  - script: |
-      echo "TODO: run Cypress"
-    displayName: Run Cypress
+# - job: TestWebsiteCypress
+#   displayName: Test App website with Cypress
+#   steps:
+#   - script: |
+#       echo "TODO: run Cypress"
+#     displayName: Run Cypress
 
 - job: TestApiPostman
   displayName: Test App API with Postman
   steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: Install Node
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: $(TF_ARTIFACT_NAME)
+
   - script: |
-      echo "TODO: run newman collection against the API"
+      npm install -g newman
+    displayName: Install Newman
+    
+  - script: |
+      cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
+      npm install
+      npm run build-env-file
+      newman run postman_collection.json -e postman_environment.json -r cli,junit --reporter-junit-export test-results/junit.xml
     displayName: Run Postman colleciton using Newman
+    workingDirectory: api-tests
+      
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    displayName: Publish Postman test results
+    inputs:
+      testRunTitle: Postman
+      testResultsFormat: JUnit
+      testResultsFiles: $(Build.SourcesDirectory)/api-tests/test-results/junit.xml
+      failTaskOnFailedTests: false
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    displayName: Publish [postman-artifacts-$(Build.BuildNumber)] artifact
+    inputs:
+      pathToPublish: $(Build.SourcesDirectory)/api-tests/test-results/junit.xml
+      ArtifactName: 'postman-artifacts-$(Build.BuildNumber)'

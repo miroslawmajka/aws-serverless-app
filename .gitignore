@@ -128,3 +128,9 @@ terraform.rc
 
 # Website config
 website/config.js
+
+# Postman environment file
+*postman_environment.json
+
+# Test results
+test-results

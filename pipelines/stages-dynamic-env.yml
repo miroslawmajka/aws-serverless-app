@@ -14,10 +14,10 @@ stages:
   jobs:
   - template: jobs-deploy-app.yml
       
-# - stage: TestApp
-#   displayName: Test App
-#   jobs:
-#   - template: jobs-test-app.yml
+- stage: TestApp
+  displayName: Test App
+  jobs:
+  - template: jobs-test-app.yml
 
 - stage: AwsCleanup
   displayName: AWS Cleanup
