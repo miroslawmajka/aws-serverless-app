@@ -1,26 +1,5 @@
 jobs:
-- job: DeployWebsite
-  displayName: Deploy Website
-  steps:  
-  - template: steps-install-aws-cli.yml
-
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      artifactName: $(TF_ARTIFACT_NAME)
-
-  - script: |
-      source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-
-      echo "window._config = { apiUrl: '$API_URL', envName: '$(DYNAMIC_ENV_NAME)' }" > website/javascript/config.js
-
-      aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
-
-      echo $WEBSITE_URL
-    displayName: Upload static website files to S3 bucket
-    env: 
-      AWS_ACCESS_KEY_ID: $(aws_access_key_id)
-      AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
-      AWS_DEFAULT_REGION: $(region)   
+- template: job-deploy-website.yml
 
 # - job: DeployNodeLambdaFunctions
 #   displayName: Deploy Node Lambda Functions

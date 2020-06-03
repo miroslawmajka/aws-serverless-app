@@ -1,5 +1,6 @@
 jobs:
-- template: jobs-newman-tests.yml
+- template: job-newman-tests.yml
+
 # - job: TestWebsiteSelenium
 #   displayName: Test App website with Selenium
 #   steps:
