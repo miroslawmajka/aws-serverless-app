@@ -127,7 +127,7 @@ terraform.rc
 # example.tfvars
 
 # Website config
-website/config.js
+website/javascript/config.js
 
 # Postman environment file
 *postman_environment.json
