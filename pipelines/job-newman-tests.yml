@@ -20,10 +20,8 @@ jobs:
   # Copy the saved Terraform output variables as a local ".env" file, install Newman, update the Postman environment file and run the collection
   - script: |
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
-      echo "Creating Postman environment file with $API_URL API URL..."
       npm install
       npm start
-      echo "Running Postman tests aginst $API_URLL..."
       sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
     workingDirectory: api-tests
