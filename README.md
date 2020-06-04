@@ -14,6 +14,15 @@ Using the [W3 Schools](https://www.w3schools.com/w3css/w3css_templates.asp) temp
 * [Selenium UI Tests](ui-tests/selenium/README.md)
 * [Cypress UI Tests](ui-tests/cypress/README.md)
 
+## Setting up the default environment
+
+Run:
+```bash
+./setup-default-environment.sh
+```
+
+This will deploy the application to AWS and return the URL at which you can access the website.
+
 # CORS
 
 Testing CORS with jQuery in the website:

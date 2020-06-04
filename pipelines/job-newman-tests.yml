@@ -4,7 +4,7 @@ jobs:
 
   variables:
   - name: TEST_RESULTS
-    value: test-results/junit.xml
+    value: $(Build.SourcesDirectory)/api-tests/test-results/junit.xml
 
   steps:
   - task: NodeTool@0
@@ -20,8 +20,10 @@ jobs:
   # Copy the saved Terraform output variables as a local ".env" file, install Newman, update the Postman environment file and run the collection
   - script: |
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
+      echo "Creating Postman environment file with $API_URL API URL..."
       npm install
       npm start
+      echo "Running Postman tests aginst $API_URLL..."
       sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
     workingDirectory: api-tests
@@ -32,12 +34,12 @@ jobs:
     inputs:
       testRunTitle: Postman Results
       testResultsFormat: JUnit
-      testResultsFiles: $(Build.SourcesDirectory)/api-tests/$(TEST_RESULTS)
+      testResultsFiles: $(TEST_RESULTS)
       failTaskOnFailedTests: false
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish [postman-results-$(Build.BuildNumber)] results artifact
+    displayName: Publish [postman-results-$(Build.BuildNumber)] artifact
     inputs:
-      pathToPublish: $(Build.SourcesDirectory)/api-tests/$(TEST_RESULTS)
-      ArtifactName: 'postman-results-$(Build.BuildNumber)'
+      pathToPublish: $(TEST_RESULTS)
+      ArtifactName: postman-results-$(Build.BuildNumber)

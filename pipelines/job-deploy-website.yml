@@ -11,12 +11,8 @@ jobs:
 
   - script: |
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-
       echo "Updating $WEBSITE_URL website..."
-
-      echo "window._config = { apiUrl: '$API_URL', envName: '$(DYNAMIC_ENV_NAME)' }" > website/javascript/config.js
-
-      aws s3 cp website/ s3://$BUCKET_NAME/ --recursive --acl public-read
+      sh deploy-website.sh $BUCKET_NAME $API_URL $(DYNAMIC_ENV_NAME)
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
