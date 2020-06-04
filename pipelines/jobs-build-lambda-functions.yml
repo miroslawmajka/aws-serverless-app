@@ -44,7 +44,8 @@ jobs:
       rm -rf artifact.zip
       zip -rq artifact.zip index.js
       zip -rq artifact.zip lib
-      zip -rq artifact.zip -i node_modules/
+# TODO: figure this out when "node_modules" are not there      
+# zip -rq artifact.zip -i node_modules/
     displayName: Build Noda deployable artifact
     workingDirectory: $(NODE_CODE_PATH)
 
