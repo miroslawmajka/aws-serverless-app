@@ -17,4 +17,4 @@ cd -
 sh deploy-website.sh ${BUCKET_NAME} ${API_URL} default
 
 echo
-echo "AWS Serverless App is ready at ${WEBSITE_URL}]
+echo "AWS Serverless App is ready at ${WEBSITE_URL}
