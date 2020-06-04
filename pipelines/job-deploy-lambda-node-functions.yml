@@ -1,0 +1,22 @@
+jobs:
+- job: DeployLambdaNodeFunctions
+  displayName: Deploy Lambda Node Functions
+  steps:  
+  - template: step-install-aws-cli.yml
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
+    displayName: Download Node functions artifact
+
+  - script: |
+      ls $(LAMBDA_NODE_DEPLOY_ARTIFACT_PATH)
+
+      echo "Updating Node Lambda functions..."
+      
+    # TODO
+    displayName: Update Node Lambda functions
+    env: 
+      AWS_ACCESS_KEY_ID: $(aws_access_key_id)
+      AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
+      AWS_DEFAULT_REGION: $(region)

@@ -1,12 +1,6 @@
 jobs:
 - template: job-deploy-website.yml
-
-# - job: DeployNodeLambdaFunctions
-#   displayName: Deploy Node Lambda Functions
-#   steps:
-#   - script: |
-#       echo "TODO: npm install --production, zip files, upload to S3 bucket and deploy to Lambda"
-#     displayName: Install modules, zip up, upload to S3 and update function
+- template: job-deploy-lambda-node-functions.yml
 
 # - job: DeployPythonLambdaFunctions
 #   displayName: Deploy Python Lambda Functions

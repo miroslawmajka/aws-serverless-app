@@ -24,6 +24,8 @@ variables:
   value: lambda-node-deploy-artifact-$(Build.BuildNumber)
 - name: LAMBDA_NODE_FUNCTIONS_ZIP
   value: lambda-node-functions.zip
+- name: LAMBDA_NODE_DEPLOY_ARTIFACT_PATH
+  value: $(System.ArtifactsDirectory)/$(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
 
 stages:
 - template: stages-dynamic-env.yml
