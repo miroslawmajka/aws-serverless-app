@@ -5,8 +5,10 @@ jobs:
   variables:
   - name: LAMBDA_NODE_TEST_RESULTS_ARTIFACT
     value: lambda-node-test-results-$(Build.BuildNumber)
+  - name: NODE_CODE_PATH
+    value: $(Build.SourcesDirectory)/lambda-src/node
   - name: TEST_RESULTS
-    value: $(Build.SourcesDirectory)/lambda-src/node/test-results/junit.xml
+    value: $(NODE_CODE_PATH)/$(TEST_RESULTS_PATH)
 
   steps:
   - task: NodeTool@0
@@ -19,7 +21,7 @@ jobs:
       npm run lint
       npm test
     displayName: Lint and unit test Node code
-    workingDirectory: lambda-src/node
+    workingDirectory: $(NODE_CODE_PATH)
       
   - task: PublishTestResults@2
     condition: succeededOrFailed()
@@ -42,19 +44,18 @@ jobs:
       rm -rf artifact.zip
       zip -rq artifact.zip index.js
       zip -rq artifact.zip lib
-      zip -rq artifact.zip node_modules
+      zip -rq artifact.zip -i node_modules/
     displayName: Build Noda deployable artifact
-    workingDirectory: lambda-src/node
+    workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishBuildArtifacts@1
     displayName: Publish $(LAMBDA_NODE_DEPLOY_ARTIFACT) artifact
     inputs:
-      pathToPublish: lambda-src/node/artifact.zip
+      pathToPublish: $(NODE_CODE_PATH)/artifact.zip
       ArtifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT)
 
 # - job: UnitTestPythonFunctions
 #   displayName: Unit Test Python Functions
-
 #   steps:
 #   - script: |
 #       echo "TODO: restore requirements and run unit tests"

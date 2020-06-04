@@ -3,8 +3,10 @@ jobs:
   displayName: Test App API with Postman
 
   variables:
+  - name: API_TESTS_PATH
+    value: $(Build.SourcesDirectory)/api-tests
   - name: TEST_RESULTS
-    value: $(Build.SourcesDirectory)/api-tests/test-results/junit.xml
+    value: $(API_TESTS_PATH)/$(TEST_RESULTS_PATH)
   - name: POSTMAN_TEST_RESULTS_ARTIFACT
     value: postman-results-$(Build.BuildNumber)
 
@@ -26,7 +28,7 @@ jobs:
       npm start
       sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
-    workingDirectory: api-tests
+    workingDirectory: $(API_TESTS_PATH)
       
   - task: PublishTestResults@2
     condition: succeededOrFailed()

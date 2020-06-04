@@ -18,6 +18,8 @@ variables:
   value: $(System.ArtifactsDirectory)/$(TF_ARTIFACT_NAME)
 - name: LAMBDA_NODE_DEPLOY_ARTIFACT
   value: lambda-node-deploy-artifact-$(Build.BuildNumber)
+- name: TEST_RESULTS_PATH
+  value: test-results/junit.xml
 
 stages:
 - template: stages-dynamic-env.yml
