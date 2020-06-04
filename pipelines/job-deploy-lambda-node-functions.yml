@@ -14,7 +14,7 @@ jobs:
 
       echo "Updating Node Lambda functions..."
       
-    # TODO
+    # TODO: get the Lambda names from TF variables
     displayName: Update Node Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
