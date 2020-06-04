@@ -1,0 +1,61 @@
+jobs:
+- job: BuildNodeFunctions
+  displayName: Build Node Functions
+
+  variables:
+  - name: LAMBDA_NODE_TEST_RESULTS_ARTIFACT
+    value: lambda-node-test-results-$(Build.BuildNumber)
+  - name: TEST_RESULTS
+    value: $(Build.SourcesDirectory)/lambda-src/node/test-results/junit.xml
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: Install Node
+  
+  - script: |
+      npm install
+      npm run lint
+      npm test
+    displayName: Lint and unit test Node code
+    workingDirectory: lambda-src/node
+      
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    displayName: Publish Node unit test results
+    inputs:
+      testRunTitle: Node Unit Tets Results
+      testResultsFormat: JUnit
+      testResultsFiles: $(TEST_RESULTS)
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    displayName: Publish Node unit test results artifact
+    inputs:
+      pathToPublish: $(TEST_RESULTS)
+      ArtifactName: $(LAMBDA_NODE_TEST_RESULTS_ARTIFACT)
+
+  - script: |
+      rm -rf node_modules
+      npm install --production
+      rm -rf artifact.zip
+      zip -rq artifact.zip index.js
+      zip -rq artifact.zip lib
+      zip -rq artifact.zip node_modules
+    displayName: Build Noda deployable artifact
+    workingDirectory: lambda-src/node
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish $(LAMBDA_NODE_DEPLOY_ARTIFACT) artifact
+    inputs:
+      pathToPublish: lambda-src/node/artifact.zip
+      ArtifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT)
+
+# - job: UnitTestPythonFunctions
+#   displayName: Unit Test Python Functions
+
+#   steps:
+#   - script: |
+#       echo "TODO: restore requirements and run unit tests"
+#     displayName: Restore requirements and run unit tests

@@ -134,3 +134,6 @@ website/javascript/config.js
 
 # Test results
 test-results
+
+# Any compressed zip files
+*.zip

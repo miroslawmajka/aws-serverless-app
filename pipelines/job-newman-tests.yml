@@ -5,6 +5,8 @@ jobs:
   variables:
   - name: TEST_RESULTS
     value: $(Build.SourcesDirectory)/api-tests/test-results/junit.xml
+  - name: POSTMAN_TEST_RESULTS_ARTIFACT
+    value: postman-results-$(Build.BuildNumber)
 
   steps:
   - task: NodeTool@0
@@ -33,11 +35,10 @@ jobs:
       testRunTitle: Postman Results
       testResultsFormat: JUnit
       testResultsFiles: $(TEST_RESULTS)
-      failTaskOnFailedTests: false
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish [postman-results-$(Build.BuildNumber)] artifact
+    displayName: Publish $(POSTMAN_TEST_RESULTS_ARTIFACT) artifact
     inputs:
       pathToPublish: $(TEST_RESULTS)
-      ArtifactName: postman-results-$(Build.BuildNumber)
+      ArtifactName: $(POSTMAN_TEST_RESULTS_ARTIFACT)

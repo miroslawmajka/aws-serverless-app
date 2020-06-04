@@ -11,11 +11,13 @@ variables:
 - name: DYNAMIC_ENV_NAME
   value: dynamic-env-$(Build.BuildID)
 - name: TF_ARTIFACT_NAME
-  value: terraform-variables
+  value: terraform-variables-$(Build.BuildID)
 - name: TF_OUTPUT_VARS
   value: variables.txt
 - name: TF_ARTIFACT_PATH
   value: $(System.ArtifactsDirectory)/$(TF_ARTIFACT_NAME)
+- name: LAMBDA_NODE_DEPLOY_ARTIFACT
+  value: lambda-node-deploy-artifact-$(Build.BuildNumber)
 
 stages:
 - template: stages-dynamic-env.yml

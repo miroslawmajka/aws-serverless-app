@@ -1,12 +1,20 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "description": "TODO: create Node lambda code",
+  "description": "Boilerplate Node Lambda functions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --color .",
+    "test": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": ["lambda"],
+  "author": "Miroslaw Majka",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.1.0",
+    "mocha": "^7.2.0",
+    "mocha-junit-reporter": "^1.23.3",
+    "nyc": "^15.1.0"
+  }
 }
