@@ -43,14 +43,14 @@ data "archive_file" "lambda_dummy_python_zip" {
 
 resource "aws_s3_bucket_object" "lambda_dummy_node_object" {
   bucket     = "${var.bucket_prefix}-deployments-${terraform.workspace}"
-  key        = "lambda-dummy-node.zip"
+  key        = "lambda-node-functions.zip"
   source     = "/tmp/lambda-dummy-node.zip"
   depends_on = [data.archive_file.lambda_dummy_node_zip, aws_s3_bucket.lambda_deployments_bucket]
 }
 
 resource "aws_s3_bucket_object" "lambda_dummy_python_object" {
   bucket     = "${var.bucket_prefix}-deployments-${terraform.workspace}"
-  key        = "lambda-dummy-python.zip"
+  key        = "lambda-python-functions.zip"
   source     = "/tmp/lambda-dummy-python.zip"
   depends_on = [data.archive_file.lambda_dummy_python_zip, aws_s3_bucket.lambda_deployments_bucket]
 }
@@ -80,7 +80,7 @@ resource "aws_lambda_function" "lambda_node_function" {
   handler       = "index.handler"
   role          = aws_iam_role.iam_for_lambda.arn
   s3_bucket     = "${var.bucket_prefix}-deployments-${terraform.workspace}"
-  s3_key        = "lambda-dummy-node.zip"
+  s3_key        = "lambda-node-functions.zip"
   depends_on    = [aws_s3_bucket_object.lambda_dummy_node_object]
 }
 
@@ -90,7 +90,7 @@ resource "aws_lambda_function" "lambda_python_function" {
   handler       = "main.handler"
   role          = aws_iam_role.iam_for_lambda.arn
   s3_bucket     = "${var.bucket_prefix}-deployments-${terraform.workspace}"
-  s3_key        = "lambda-dummy-python.zip"
+  s3_key        = "lambda-python-functions.zip"
   depends_on    = [aws_s3_bucket_object.lambda_dummy_python_object]
 }
 

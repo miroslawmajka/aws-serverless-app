@@ -4,23 +4,23 @@ stages:
   jobs:
   - template: jobs-build-lambda-functions.yml
 
-- stage: SetupAwsInfrastrcture
-  displayName: Setup AWS Infrastrcture
-  jobs:
-  - template: jobs-build-aws-infrastructure.yml
+# - stage: SetupAwsInfrastrcture
+#   displayName: Setup AWS Infrastrcture
+#   jobs:
+#   - template: jobs-build-aws-infrastructure.yml
       
-- stage: DeployApp
-  displayName: Deploy App
-  jobs:
-  - template: jobs-deploy-app.yml
+# - stage: DeployApp
+#   displayName: Deploy App
+#   jobs:
+#   - template: jobs-deploy-app.yml
       
-- stage: TestApp
-  displayName: Test App
-  jobs:
-  - template: jobs-test-app.yml
+# - stage: TestApp
+#   displayName: Test App
+#   jobs:
+#   - template: jobs-test-app.yml
 
-- stage: AwsCleanup
-  displayName: AWS Cleanup
-  condition: always()
-  jobs:
-  - template: jobs-destroy-aws-infrastructure.yml
+# - stage: AwsCleanup
+#   displayName: AWS Cleanup
+#   condition: always()
+#   jobs:
+#   - template: jobs-destroy-aws-infrastructure.yml

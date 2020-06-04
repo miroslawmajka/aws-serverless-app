@@ -20,12 +20,12 @@ jobs:
       npm install
       npm run lint
       npm test
-    displayName: Lint and unit test Node code
+    displayName: Lint and unit test code
     workingDirectory: $(NODE_CODE_PATH)
       
   - task: PublishTestResults@2
     condition: succeededOrFailed()
-    displayName: Publish Node unit test results
+    displayName: Publish unit test results
     inputs:
       testRunTitle: Node Unit Tets Results
       testResultsFormat: JUnit
@@ -33,27 +33,27 @@ jobs:
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish Node unit test results artifact
+    displayName: Publish $(LAMBDA_NODE_TEST_RESULTS_ARTIFACT) artifact
     inputs:
       pathToPublish: $(TEST_RESULTS)
       ArtifactName: $(LAMBDA_NODE_TEST_RESULTS_ARTIFACT)
 
   - script: |
       rm -rf node_modules
+      mkdir node_modules
       npm install --production
-      rm -rf artifact.zip
-      zip -rq artifact.zip index.js
-      zip -rq artifact.zip lib
-# TODO: figure this out when "node_modules" are not there      
-# zip -rq artifact.zip -i node_modules/
-    displayName: Build Noda deployable artifact
+      rm -rf $(LAMBDA_NODE_FUNCTIONS_ZIP)
+      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) index.js
+      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) lib      
+      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) node_modules
+    displayName: Build deployable artifact
     workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishBuildArtifacts@1
-    displayName: Publish $(LAMBDA_NODE_DEPLOY_ARTIFACT) artifact
+    displayName: Publish $(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME) artifact
     inputs:
-      pathToPublish: $(NODE_CODE_PATH)/artifact.zip
-      ArtifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT)
+      pathToPublish: $(NODE_CODE_PATH)/$(LAMBDA_NODE_FUNCTIONS_ZIP)
+      ArtifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
 
 # - job: UnitTestPythonFunctions
 #   displayName: Unit Test Python Functions

@@ -7,7 +7,9 @@
     "lint": "eslint --color .",
     "test": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml"
   },
-  "keywords": ["lambda"],
+  "keywords": [
+    "lambda"
+  ],
   "author": "Miroslaw Majka",
   "license": "ISC",
   "devDependencies": {
