@@ -6,15 +6,22 @@ jobs:
 
   - task: DownloadBuildArtifacts@0
     inputs:
+      artifactName: $(TF_ARTIFACT_NAME)
+    displayName: Download Terraform output artifact
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
       artifactName: $(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
     displayName: Download Node functions artifact
 
   - script: |
-      ls $(LAMBDA_NODE_DEPLOY_ARTIFACT_PATH)
+      source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
 
       echo "Updating Node Lambda functions..."
-      
-    # TODO: get the Lambda names from TF variables
+
+      aws s3 cp $(LAMBDA_NODE_DEPLOY_ARTIFACT_PATH)/$(LAMBDA_NODE_FUNCTIONS_ZIP) s3://$DEPLOYMENT_BUCKET_NAME/$(LAMBDA_NODE_FUNCTIONS_ZIP)
+
+      aws lambda update-function-code --function-name $LAMBDA_NODE_NAME --s3-bucket $DEPLOYMENT_BUCKET_NAME --s3-key $(LAMBDA_NODE_FUNCTIONS_ZIP)
     displayName: Update Node Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
