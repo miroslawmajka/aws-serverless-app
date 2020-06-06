@@ -16,8 +16,8 @@ jobs:
       echo WEBSITE_BUCKET_NAME=`terraform output website_bucket_name` > $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo API_URL=`terraform output serverless_rest_api_base_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo WEBSITE_URL=`terraform output website_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo LAMBDA_NODE_NAME=`terraform output lambda_node_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo LAMBDA_PYTHON_NAME=`terraform output lambda_python_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      echo LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      echo LAMBDA_PYTHON_HELLO_NAME=`terraform output lambda_python_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo DEPLOYMENT_BUCKET_NAME=`terraform output deployment_bucket_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
     displayName: Create $(DYNAMIC_ENV_NAME) environment
     workingDirectory: terraform

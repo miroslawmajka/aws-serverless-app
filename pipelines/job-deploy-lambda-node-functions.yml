@@ -21,7 +21,7 @@ jobs:
 
       aws s3 cp $(LAMBDA_NODE_DEPLOY_ARTIFACT_PATH)/$(LAMBDA_NODE_FUNCTIONS_ZIP) s3://$DEPLOYMENT_BUCKET_NAME/$(LAMBDA_NODE_FUNCTIONS_ZIP)
 
-      aws lambda update-function-code --function-name $LAMBDA_NODE_NAME --s3-bucket $DEPLOYMENT_BUCKET_NAME --s3-key $(LAMBDA_NODE_FUNCTIONS_ZIP)
+      aws lambda update-function-code --function-name $LAMBDA_NODE_HELLO_NAME --s3-bucket $DEPLOYMENT_BUCKET_NAME --s3-key $(LAMBDA_NODE_FUNCTIONS_ZIP)
     displayName: Update Node Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
