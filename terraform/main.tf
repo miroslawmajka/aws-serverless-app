@@ -9,8 +9,10 @@ terraform {
 }
 
 locals {
-  lambda_deployment_bucket_name = "${var.bucket_prefix}-lambda-deployment-${terraform.workspace}"
-  dummy_lambda_path             = "${path.root}/dummy-lambda"
+  lambda_deployment_bucket_name     = "${var.app_prefix}-lambda-deployment-${terraform.workspace}"
+  lambda_node_hello_function_name   = "${var.app_prefix}-node-hello-${terraform.workspace}"
+  lambde_python_hello_function_name = "${var.app_prefix}-python-hello-${terraform.workspace}"
+  dummy_lambda_path                 = "${path.root}/dummy-lambda"
 }
 
 ######################################
@@ -27,7 +29,7 @@ resource "aws_s3_bucket" "lambda_deployments_bucket" {
 ###########################
 
 resource "aws_iam_role" "lambda_exec_role" {
-  name               = "lambda-role-${terraform.workspace}"
+  name               = "${var.app_prefix}-lambda-role-${terraform.workspace}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -45,10 +47,11 @@ resource "aws_iam_role" "lambda_exec_role" {
 EOF
 }
 
+# TODO: use maps for runtime variables
 module "lambda_node_hello" {
   source                           = "./modules/lambda"
   lambda_role_arn                  = aws_iam_role.lambda_exec_role.arn
-  lambda_name                      = "aws-serverless-app-node-function-${terraform.workspace}"
+  lambda_name                      = local.lambda_node_hello_function_name
   handler                          = "index.handler"
   runtime                          = "nodejs12.x"
   dummy_artifact_directory         = "${local.dummy_lambda_path}/node"
@@ -60,10 +63,11 @@ module "lambda_node_hello" {
   lambda_role_depends_on           = [aws_iam_role.lambda_exec_role]
 }
 
+# TODO: use maps for runtime variables
 module "lambda_python_hello" {
   source                           = "./modules/lambda"
   lambda_role_arn                  = aws_iam_role.lambda_exec_role.arn
-  lambda_name                      = "aws-serverless-app-python-function-${terraform.workspace}"
+  lambda_name                      = local.lambde_python_hello_function_name
   handler                          = "main.handler"
   runtime                          = "python3.8"
   dummy_artifact_directory         = "${local.dummy_lambda_path}/python"
@@ -75,9 +79,9 @@ module "lambda_python_hello" {
   lambda_role_depends_on           = [aws_iam_role.lambda_exec_role]
 }
 
-######################
-# STEP 3 - API Gateway
-######################
+###################################
+# STEP 3 - API Gateway Integrations
+###################################
 
 resource "aws_api_gateway_rest_api" "serverless_api" {
   name        = "aws-serverless-app-rest-api-${terraform.workspace}"
@@ -85,82 +89,39 @@ resource "aws_api_gateway_rest_api" "serverless_api" {
   depends_on  = [module.lambda_node_hello, module.lambda_python_hello]
 }
 
-resource "aws_api_gateway_resource" "resource_hello_node" {
-  path_part   = "hello-node"
-  parent_id   = aws_api_gateway_rest_api.serverless_api.root_resource_id
-  rest_api_id = aws_api_gateway_rest_api.serverless_api.id
+module "api_gateway_node_hello_integration" {
+  source            = "./modules/api-gateway"
+  lambda_name       = local.lambda_node_hello_function_name
+  lambda_invoke_arn = module.lambda_node_hello.function_invoke_arn
+  rest_api          = aws_api_gateway_rest_api.serverless_api
+  top_api_path      = "hello-node"
+  verb              = "GET"
 }
 
-resource "aws_api_gateway_method" "method_node" {
-  rest_api_id   = aws_api_gateway_rest_api.serverless_api.id
-  resource_id   = aws_api_gateway_resource.resource_hello_node.id
-  http_method   = "GET"
-  authorization = "NONE"
+module "api_gateway_python_hello_integration" {
+  source            = "./modules/api-gateway"
+  lambda_name       = local.lambde_python_hello_function_name
+  lambda_invoke_arn = module.lambda_python_hello.function_invoke_arn
+  rest_api          = aws_api_gateway_rest_api.serverless_api
+  top_api_path      = "hello-python"
+  verb              = "GET"
 }
 
-resource "aws_api_gateway_integration" "lambda_node_hello_integration" {
-  rest_api_id             = aws_api_gateway_rest_api.serverless_api.id
-  resource_id             = aws_api_gateway_resource.resource_hello_node.id
-  http_method             = aws_api_gateway_method.method_node.http_method
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = module.lambda_node_hello.function_invoke_arn
-}
-
-resource "aws_lambda_permission" "apigw_node_lambda" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
-  function_name = module.lambda_node_hello.function_name
-  principal     = "apigateway.amazonaws.com"
-}
-
-resource "aws_api_gateway_resource" "resource_hello_python" {
-  path_part   = "hello-python"
-  parent_id   = aws_api_gateway_rest_api.serverless_api.root_resource_id
-  rest_api_id = aws_api_gateway_rest_api.serverless_api.id
-}
-
-resource "aws_api_gateway_method" "method_python" {
-  rest_api_id   = aws_api_gateway_rest_api.serverless_api.id
-  resource_id   = aws_api_gateway_resource.resource_hello_python.id
-  http_method   = "GET"
-  authorization = "NONE"
-}
-
-resource "aws_api_gateway_integration" "lambda_python_hello_integration" {
-  rest_api_id             = aws_api_gateway_rest_api.serverless_api.id
-  resource_id             = aws_api_gateway_resource.resource_hello_python.id
-  http_method             = aws_api_gateway_method.method_python.http_method
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = module.lambda_python_hello.function_invoke_arn
-}
-
-resource "aws_lambda_permission" "apigw_python_lambda" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
-  function_name = module.lambda_python_hello.function_name
-  principal     = "apigateway.amazonaws.com"
-}
-
-resource "aws_api_gateway_deployment" "dynamic_deployment" {
-  depends_on  = [aws_api_gateway_integration.lambda_python_hello_integration, aws_api_gateway_integration.lambda_node_hello_integration]
-  rest_api_id = aws_api_gateway_rest_api.serverless_api.id
+resource "aws_api_gateway_deployment" "dynamic_api_stage_deployment" {
   stage_name  = "stage-${terraform.workspace}"
+  rest_api_id = aws_api_gateway_rest_api.serverless_api.id
+  depends_on  = [module.api_gateway_python_hello_integration, module.api_gateway_node_hello_integration]
 }
 
-# TODO: add CORS and OPTIONS method configuration for production deployment
+###################################
+# STEP 4 - S3 Static Website Bucket
+###################################
 
-###############################
-# STEP 4 - Static Website in S3
-###############################
-
-# The AWS S3 static website bucket with workspace/environment name appended
 resource "aws_s3_bucket" "website_bucket" {
-  depends_on    = [aws_api_gateway_deployment.dynamic_deployment]
-  bucket        = "${var.bucket_prefix}-aws-serverless-app-${terraform.workspace}"
-  acl           = "public-read"
+  bucket        = "${var.app_prefix}-aws-serverless-app-${terraform.workspace}"
   force_destroy = true
+  acl           = "public-read"
+  depends_on    = [aws_api_gateway_deployment.dynamic_api_stage_deployment]
   website {
     index_document = "index.html"
     error_document = "error.html"

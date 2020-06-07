@@ -4,7 +4,7 @@ output "website_url" {
 }
 
 output "serverless_rest_api_base_url" {
-  value = aws_api_gateway_deployment.dynamic_deployment.invoke_url
+  value = aws_api_gateway_deployment.dynamic_api_stage_deployment.invoke_url
   description = "The AWS Serverless App REST API URL"
 }
 

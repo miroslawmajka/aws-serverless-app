@@ -1,5 +1,5 @@
 # The AWS S3 bucket to use for storing state
-bucket = "UNIQUE_VALUE"
+bucket = "UNIQUEVALUE"
 # The key (JSON state file)
 key = "tfstate.json"
 # AWS region

@@ -1,10 +1,12 @@
-exports.handler = async (event) => {
-    const response = {
+async function dummyHandler(event) {
+    return {
         statusCode: 200,
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify('DUMMY NODE RESPONSE'),
     };
-    return response;
 };
+
+exports.handler = dummyHandler;
+exports.lotteryHandler = dummyHandler;

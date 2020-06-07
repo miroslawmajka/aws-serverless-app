@@ -6,5 +6,5 @@ def handler(event, context):
         'headers': {
             'Access-Control-Allow-Origin': '*'
         },
-        'body': json.dumps('Actual Python function')
+        'body': json.dumps('Hello from Lambda Python!')
     }
