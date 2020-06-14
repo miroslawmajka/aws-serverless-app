@@ -1,5 +1,8 @@
-trigger: 
-- master
+# trigger: 
+# - master
+
+# Disabled for now
+trigger: none
 
 name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
 

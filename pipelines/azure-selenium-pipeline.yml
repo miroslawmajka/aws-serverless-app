@@ -1,0 +1,20 @@
+trigger: none
+
+name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
+
+stages:
+- stage: SeleniumTests
+  displayName: Selenium Tests
+  jobs:
+  - job: TestWebsiteSelenium
+    displayName: Test App website with Selenium
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '12.x'
+      displayName: Install Node
+    - script: |
+        npm Install
+        npm test
+      displayName: Run WebdriverIO Tests
+      workingDirectory: ui-tests/selenium

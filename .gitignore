@@ -137,3 +137,5 @@ test-results
 
 # Any compressed zip files
 *.zip
+
+output
