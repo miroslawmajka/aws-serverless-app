@@ -14,7 +14,7 @@ stages:
         versionSpec: '12.x'
       displayName: Install Node
     - script: |
-        npm Install
+        npm install
         npm test
       displayName: Run WebdriverIO Tests
       workingDirectory: ui-tests/selenium
