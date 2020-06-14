@@ -18,3 +18,5 @@ stages:
         npm test
       displayName: Run WebdriverIO Tests
       workingDirectory: ui-tests/selenium
+      env:
+        HEADLESS_CHROME: "true"
