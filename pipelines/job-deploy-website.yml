@@ -12,7 +12,7 @@ jobs:
   - script: |
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo "Updating $WEBSITE_URL website..."
-      sh deploy-website.sh $WEBSITE_BUCKET_NAME $API_URL $(DYNAMIC_ENV_NAME)
+      sh unix-scripts/deploy-website.sh $WEBSITE_BUCKET_NAME $API_URL $(DYNAMIC_ENV_NAME)
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)

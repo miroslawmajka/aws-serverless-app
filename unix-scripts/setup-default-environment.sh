@@ -14,7 +14,7 @@ WEBSITE_URL=`terraform output website_url`
 
 cd -
 
-sh deploy-website.sh ${WEBSITE_BUCKET_NAME} ${API_URL} default
+sh unix-scripts/deploy-website.sh ${WEBSITE_BUCKET_NAME} ${API_URL} default
 
 echo ""
 echo "AWS Serverless App is ready at ${WEBSITE_URL}"

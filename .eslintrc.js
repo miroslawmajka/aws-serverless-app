@@ -8,13 +8,12 @@ module.exports = {
     extends: 'eslint:recommended',
     parserOptions: {
         sourceType: 'module',
-        ecmaVersion: 2017
+        ecmaVersion: 2020
     },
     rules: {
         'no-undef': 'off',
         'no-var': 'error',
         'newline-before-return': 'error',
-        'prefer-arrow-callback': 'warn',
         'no-console': 'off',
         'prefer-template': 'error',
         'no-unused-vars': [
@@ -36,7 +35,6 @@ module.exports = {
         strict: ['error', 'global'],
         'arrow-parens': ['error', 'as-needed'],
         'comma-dangle': ['error', 'never'],
-        'space-before-function-paren': ['error', 'never'],
         'object-curly-spacing': ['error', 'always'],
         'space-in-parens': ['error', 'never'],
         'array-bracket-spacing': ['error', 'never'],

@@ -11,18 +11,20 @@ jobs:
     value: $(NODE_CODE_PATH)/$(TEST_RESULTS_PATH)
 
   steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '12.x'
-    displayName: Install Node
+  - template: step-install-node.yml
   
-  - script: |
-      npm install
-      npm run lint
-      npm test
-    displayName: Lint and unit test code
+  - script: npm install
+    displayName: Restore npm modules
     workingDirectory: $(NODE_CODE_PATH)
-      
+  
+  - script: npm run lint
+    displayName: Lint JavaScript
+    workingDirectory: $(NODE_CODE_PATH)
+  
+  - script: npm test
+    displayName: Run unit tests
+    workingDirectory: $(NODE_CODE_PATH)
+
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     displayName: Publish unit test results

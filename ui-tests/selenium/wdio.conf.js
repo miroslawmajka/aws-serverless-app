@@ -1,6 +1,11 @@
 require('dotenv').config();
 
+const HEADLESS_CHROME = process.env.HEADLESS_CHROME;
+const WEBSITE_URL = process.env.WEBSITE_URL;
+const DEBUG = process.env.DEBUG;
+
 const HALF_MINUTE = 30000;
+const FEATURES_DIR = 'features';
 
 const capabilities = [
     {
@@ -9,7 +14,7 @@ const capabilities = [
     }
 ];
 
-if (process.env.HEADLESS_CHROME)
+if (HEADLESS_CHROME)
     capabilities.forEach(c => {
         c['goog:chromeOptions'] = {
             args: ['--headless', '--disable-gpu']
@@ -21,7 +26,7 @@ const wdioConfig = {
     connectionRetryCount: 3,
     waitforTimeout: HALF_MINUTE / 3,
     connectionRetryTimeout: HALF_MINUTE,
-    baseUrl: process.env.BASE_URL,
+    baseUrl: WEBSITE_URL,
     logLevel: 'warn',
     before: () => {
         const chai = require('chai');
@@ -31,14 +36,14 @@ const wdioConfig = {
     onComplete: exitCode => {
         console.log(`All WebdriverIO workers complete with "${exitCode}" exit code`);
     },
-    specs: ['./features/*.feature'],
+    specs: [`./${FEATURES_DIR}/*.feature`],
     framework: 'cucumber',
     cucumberOpts: {
         format: ['pretty'],
         colors: true,
         timeout: HALF_MINUTE * 2,
         backtrace: true,
-        require: ['./features/support/*.js', './features/step_definitions/*.js']
+        require: [`./${FEATURES_DIR}/support/*.js`, `./${FEATURES_DIR}/step_definitions/*.js`]
     },
     reporters: [
         'spec',
@@ -62,8 +67,8 @@ const wdioConfig = {
     services: ['chromedriver']
 };
 
-if (process.env.DEBUG === 'true') {
-    wdioConfig.debug = process.env.DEBUG === 'true';
+if (DEBUG === 'true') {
+    wdioConfig.debug = true;
     wdioConfig.execArgv = ['--inspect-brk=127.0.0.1:5859'];
 }
 

@@ -1,19 +1,11 @@
 const { After } = require('cucumber');
-
-const FAILED_STATUS = 'failed';
-
-After(scenario => {
-    if (scenario.result.status === FAILED_STATUS) {
-        takeScreenshot(browser);
-        savePageSource(browser);
-    }
-});
-
 const moment = require('moment');
 const fs = require('fs');
 
-const SCREENSHOTS_DIR = './output/screenshots';
-const PAGE_SOURCES_DIR = './output/page-sources';
+const FAILED_STATUS = 'failed';
+const SELENIUM_OUTPUT_DIR = 'selenium-output';
+const SCREENSHOTS_DIR = `./${SELENIUM_OUTPUT_DIR}/screenshots`;
+const PAGE_SOURCES_DIR = `./${SELENIUM_OUTPUT_DIR}/page-sources`;
 
 function takeScreenshot(browser) {
     const screenshotFileName = `SCREENSHOT_${getBrowserName(browser)}_${getTimestamp()}.png`;
@@ -50,3 +42,10 @@ function getTimestamp() {
 function getBrowserName(browser) {
     return browser.capabilities.browserName.replace(/\s+/g, '');
 }
+
+After(scenario => {
+    if (scenario.result.status === FAILED_STATUS) {
+        takeScreenshot(browser);
+        savePageSource(browser);
+    }
+});

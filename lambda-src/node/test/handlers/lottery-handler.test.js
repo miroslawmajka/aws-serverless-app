@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow-callback */
 const chai = require('chai');
 const should = chai.should();
 

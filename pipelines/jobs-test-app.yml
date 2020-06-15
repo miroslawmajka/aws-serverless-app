@@ -1,12 +1,6 @@
 jobs:
 - template: job-newman-tests.yml
-
-# - job: TestWebsiteSelenium
-#   displayName: Test App website with Selenium
-#   steps:
-#   - script: |
-#       echo "TODO: run WebdriverIO"
-#     displayName: Run WebdriverIO Tests
+- template: job-selenium-tests.yml
 
 # - job: TestWebsiteCypress
 #   displayName: Test App website with Cypress

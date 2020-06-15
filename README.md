@@ -18,7 +18,7 @@ Using the [W3 Schools](https://www.w3schools.com/w3css/w3css_templates.asp) temp
 
 Run:
 ```bash
-./setup-default-environment.sh
+./unix-scripts/setup-default-environment.sh
 ```
 
 This will deploy the application to AWS and return the URL at which you can access the website.
@@ -27,7 +27,7 @@ This will deploy the application to AWS and return the URL at which you can acce
 
 Run:
 ```bash
-./destroy-default-environment.sh
+./unix-scripts/destroy-default-environment.sh
 ```
 
 This command will remove all AWS resources from the **default** Terraform workspace.

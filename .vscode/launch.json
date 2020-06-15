@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Selenium Tests",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/ui-tests/selenium",
+            "runtimeArgs": ["test"],
+            "port": 5859,
+            "env": {
+                "DEBUG": "true"
+            }
+        }
+    ]
+}

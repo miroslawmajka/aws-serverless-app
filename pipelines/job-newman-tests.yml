@@ -11,10 +11,7 @@ jobs:
     value: postman-results-$(Build.BuildNumber)
 
   steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '12.x'
-    displayName: Install Node
+  - template: step-install-node.yml
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -26,10 +23,13 @@ jobs:
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
       npm install
       npm start
-      sh run-newman-tests.sh $(TEST_RESULTS)
+    displayName: Setup Newman environment file
+    workingDirectory: $(API_TESTS_PATH)
+
+  - script: sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
     workingDirectory: $(API_TESTS_PATH)
-      
+
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     displayName: Publish Postman test results
