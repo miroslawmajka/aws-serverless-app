@@ -7,7 +7,7 @@
         "lint": "eslint --color .",
         "mocha": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml",
         "nyc": "nyc --reporter=cobertura npm run mocha",
-        "coverage": "nyc report && nyc report --reporter=text-summary && nyc report --reporter=html",
+        "coverage": "nyc report && nyc report --reporter=text-summary",
         "test": "npm run lint && npm run nyc && npm run coverage"
     },
     "keywords": [

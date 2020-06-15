@@ -30,6 +30,7 @@ jobs:
       testResultsFiles: $(TEST_RESULTS)
 
   - task: PublishCodeCoverageResults@1
+    displayName: Publish unit test code coverage
     inputs: 
       codeCoverageTool: Cobertura
       summaryFileLocation: $(NODE_CODE_PATH)/coverage/*coverage.xml
