@@ -5,7 +5,10 @@
     "main": "index.js",
     "scripts": {
         "lint": "eslint --color .",
-        "test": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml"
+        "mocha": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml",
+        "nyc": "nyc --reporter=cobertura npm run mocha",
+        "coverage": "nyc report && nyc report --reporter=text-summary && nyc report --reporter=html",
+        "test": "npm run lint && npm run nyc && npm run coverage"
     },
     "keywords": [
         "lambda"

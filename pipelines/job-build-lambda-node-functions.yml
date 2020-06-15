@@ -17,12 +17,8 @@ jobs:
     displayName: Restore npm modules
     workingDirectory: $(NODE_CODE_PATH)
   
-  - script: npm run lint
-    displayName: Lint JavaScript
-    workingDirectory: $(NODE_CODE_PATH)
-  
   - script: npm test
-    displayName: Run unit tests
+    displayName: Run linting, unit tests and coverage
     workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishTestResults@2
@@ -32,6 +28,12 @@ jobs:
       testRunTitle: Node Unit Tets Results
       testResultsFormat: JUnit
       testResultsFiles: $(TEST_RESULTS)
+
+  - task: PublishCodeCoverageResults@1
+    inputs: 
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(NODE_CODE_PATH)/coverage/*coverage.xml
+      reportDirectory: $(NODE_CODE_PATH)/coverage
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
