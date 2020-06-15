@@ -11,11 +11,13 @@ pool:
 
 variables:
 - group: AwsCredentials
-- name: DYNAMIC_ENV_NAME
+
+- name: ENVIRONMENT_NAME
   value: dynamic-env-$(Build.BuildID)
+
 - name: TEST_RESULTS_PATH
   value: test-results/junit.xml
-
+  
 - name: TF_ARTIFACT_NAME
   value: terraform-variables-$(Build.BuildNumber)
 - name: TF_OUTPUT_VARS

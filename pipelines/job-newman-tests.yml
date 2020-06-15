@@ -22,7 +22,7 @@ jobs:
   - script: |
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
       npm install
-      npm start
+      npm run build-env-file
     displayName: Setup Newman environment file
     workingDirectory: $(API_TESTS_PATH)
 

@@ -7,7 +7,7 @@
         "postman"
     ],
     "scripts": {
-        "start": "node build-env-file.js"
+        "build-env-file": "node build-env-file.js"
     },
     "author": "Miroslaw Majka",
     "license": "MIT",

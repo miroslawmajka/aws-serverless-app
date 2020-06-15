@@ -11,4 +11,7 @@ then
     exit 1
 fi
 
-./node_modules/.bin/newman run postman_collection.json -e postman_environment.json -r cli,junit --reporter-junit-export ${TEST_RESULTS}
+./node_modules/.bin/newman run postman_collection.json \
+    -e postman_environment.json \
+    -r cli,junit \
+    --reporter-junit-export ${TEST_RESULTS}

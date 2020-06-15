@@ -13,6 +13,6 @@ then
     exit 1
 fi
 
-echo "Updating Node Lambda functions..."
+echo "Updating ${LAMBDA_NAME} Lambda function..."
 
 aws lambda update-function-code --function-name ${LAMBDA_NAME} --s3-bucket ${DEPLOYMENT_BUCKET_NAME} --s3-key ${LAMBDA_NODE_FUNCTIONS_ZIP}

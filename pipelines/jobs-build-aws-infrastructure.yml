@@ -7,9 +7,9 @@ jobs:
   - script: |    
       terraform init -backend-config="aws-s3-backend.tfconfig"
       terraform validate
-      sh select-workspace.sh $(DYNAMIC_ENV_NAME)
-      terraform plan -out $(DYNAMIC_ENV_NAME).tfplan
-      terraform apply "$(DYNAMIC_ENV_NAME).tfplan"
+      sh select-workspace.sh $(ENVIRONMENT_NAME)
+      terraform plan -out $(ENVIRONMENT_NAME).tfplan
+      terraform apply "$(ENVIRONMENT_NAME).tfplan"
 
       mkdir -p $(TF_ARTIFACT_PATH)
 
@@ -19,7 +19,7 @@ jobs:
       echo LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo LAMBDA_PYTHON_HELLO_NAME=`terraform output lambda_python_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       echo DEPLOYMENT_BUCKET_NAME=`terraform output deployment_bucket_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-    displayName: Create $(DYNAMIC_ENV_NAME) environment
+    displayName: Create $(ENVIRONMENT_NAME) environment
     workingDirectory: terraform
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
