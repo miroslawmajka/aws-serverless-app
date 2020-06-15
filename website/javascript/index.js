@@ -19,10 +19,7 @@ function openCity(evt, cityName) {
     }
     var activebtn = document.getElementsByClassName('testbtn');
     for (i = 0; i < x.length; i++) {
-        activebtn[i].className = activebtn[i].className.replace(
-            ' w3-dark-grey',
-            ''
-        );
+        activebtn[i].className = activebtn[i].className.replace(' w3-dark-grey', '');
     }
     document.getElementById(cityName).style.display = 'block';
     evt.currentTarget.className += ' w3-dark-grey';
@@ -90,7 +87,7 @@ const pSpinner = $('#pSpinner');
 
 $('#btnTestNodeLambda').click(() => {
     pSpinner.show();
-    $.get(`${_config.apiUrl}/hello-node`, (data) => {
+    $.get(`${_config.apiUrl}/hello-node`, data => {
         txtLambdaOuput.val(data);
         pSpinner.hide();
     });
@@ -98,7 +95,7 @@ $('#btnTestNodeLambda').click(() => {
 
 $('#btnTestPythonLambda').click(() => {
     pSpinner.show();
-    $.get(`${_config.apiUrl}/hello-python`, (data) => {
+    $.get(`${_config.apiUrl}/hello-python`, data => {
         txtLambdaOuput.val(data);
         pSpinner.hide();
     });

@@ -1,18 +1,20 @@
 {
-    "name": "selenium",
+    "name": "selenium-ui-tests",
     "version": "1.0.0",
+    "author": "Miroslaw Majka",
+    "license": "MIT",
     "description": "WebdriverIO Selenium tests for the AWS Serverless App",
+    "keywords": [
+        "selenium",
+        "cucumber",
+        "webdriverio",
+        "bdd",
+        "chromedriver"
+    ],
     "scripts": {
         "lint": "eslint --color .",
         "test": "wdio wdio.conf.js"
     },
-    "keywords": [
-        "selenium",
-        "cucumber",
-        "webdriverio"
-    ],
-    "author": "Miroslaw Majka",
-    "license": "MIT",
     "devDependencies": {
         "@wdio/cli": "^5.23.0",
         "@wdio/cucumber-framework": "^5.23.0",
@@ -26,7 +28,6 @@
         "dotenv": "^8.2.0",
         "eslint": "^6.8.0",
         "moment": "^2.26.0",
-        "selenium-webdriver": "^4.0.0-alpha.7",
         "wdio-chromedriver-service": "^5.0.2",
         "webdriverio": "^5.23.0"
     }

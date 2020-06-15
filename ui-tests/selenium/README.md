@@ -1,1 +1,3 @@
-TODO: create WDIO selenium test suite
+# Selenium WebdrverIO Tests
+
+TODO: describe the suite

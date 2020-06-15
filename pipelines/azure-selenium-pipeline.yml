@@ -44,12 +44,12 @@ stages:
       condition: succeededOrFailed()
       displayName: Publish Selenium results artifact
       inputs:
-        pathToPublish: ui-tests/selenium/test-results/*.xml
+        pathToPublish: ui-tests/selenium/test-results
         ArtifactName: selenium-results-artifact-$(Build.BuildNumber)
 
     - task: PublishBuildArtifacts@1
       condition: succeededOrFailed()
       displayName: Publish Selenium output artifact
       inputs:
-        pathToPublish: ui-tests/selenium-output/*
+        pathToPublish: ui-tests/selenium/selenium-output
         ArtifactName: selenium-output-artifact-$(Build.BuildNumber)    
