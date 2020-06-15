@@ -52,7 +52,7 @@ module "lambda_node_hello" {
   source                           = "./modules/lambda"
   lambda_role_arn                  = aws_iam_role.lambda_exec_role.arn
   lambda_name                      = local.lambda_node_hello_function_name
-  handler                          = "index.handler"
+  handler                          = "index.helloHandler"
   runtime                          = "nodejs12.x"
   dummy_artifact_directory         = "${local.dummy_lambda_path}/node"
   dummy_artifact_handler_file_name = "index.js"
@@ -68,7 +68,7 @@ module "lambda_python_hello" {
   source                           = "./modules/lambda"
   lambda_role_arn                  = aws_iam_role.lambda_exec_role.arn
   lambda_name                      = local.lambde_python_hello_function_name
-  handler                          = "main.handler"
+  handler                          = "main.helloHandler"
   runtime                          = "python3.8"
   dummy_artifact_directory         = "${local.dummy_lambda_path}/python"
   dummy_artifact_handler_file_name = "main.py"

@@ -4,9 +4,9 @@ async function dummyHandler(event) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify('DUMMY NODE RESPONSE'),
+        body: JSON.stringify('DUMMY NODE RESPONSE')
     };
-};
+}
 
-exports.handler = dummyHandler;
+exports.helloHandler = dummyHandler;
 exports.lotteryHandler = dummyHandler;

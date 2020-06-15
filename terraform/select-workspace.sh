@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 
-echo "Determining if $1 workspace exists..."
+WORKSPACE_NAME=$1
 
-if [ $(terraform workspace list | grep -c "$1") -eq 0 ] ; then
-  echo "Creating new $1 workspace..."
-  terraform workspace new "$1" -no-color
+if [ -z ${WORKSPACE_NAME} ]
+then
+    echo "Usage:"
+    echo "$0 WORKSPACE_NAME"
+    echo "Invalid parameters passed. Exiting."
+
+    exit 1
+fi
+
+echo "Determining if ${WORKSPACE_NAME} workspace exists..."
+
+if [ $(terraform workspace list | grep -c "${WORKSPACE_NAME}") -eq 0 ] ; then
+  echo "Creating new ${WORKSPACE_NAME} workspace..."
+  terraform workspace new "${WORKSPACE_NAME}" -no-color
 else
-  echo "Selecting existing $1 workspace..."
-  terraform workspace select "$1" -no-color
+  echo "Selecting existing ${WORKSPACE_NAME} workspace..."
+  terraform workspace select "${WORKSPACE_NAME}" -no-color
 fi

@@ -2,8 +2,11 @@
 
 TEST_RESULTS=$1
 
-if [[ -z ${TEST_RESULTS} ]]; then
-    echo "No test results location name passed in. Exiting."
+if [ -z ${TEST_RESULTS} ]
+then
+    echo "Usage:"
+    echo "$0 TEST_RESULTS"
+    echo "Invalid parameters passed. Exiting."
 
     exit 1
 fi
