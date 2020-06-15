@@ -1,10 +1,13 @@
 class LambdaResponse {
-    constructor(body) {
+    constructor(message) {
         this.statusCode = 200;
         this.headers = {
             'Access-Control-Allow-Origin': '*'
         };
-        this.body = body;
+        this.body = JSON.stringify({
+            success: true,
+            message
+        });
     }
 }
 

@@ -4,7 +4,10 @@ async function dummyHandler(event) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify('DUMMY NODE RESPONSE')
+        body: JSON.stringify({
+            success: true,
+            message: 'DUMMY NODE RESPONSE'
+        })
     };
 }
 

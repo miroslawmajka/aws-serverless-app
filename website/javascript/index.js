@@ -85,20 +85,14 @@ $('#pApiUrl').text(`API URL: ${_config.apiUrl}`);
 const txtLambdaOuput = $('#txtLambdaOuput');
 const pSpinner = $('#pSpinner');
 
-$('#btnTestNodeLambda').click(() => {
+function handleApiClick(endpoint) {
     pSpinner.show();
-    $.get(`${_config.apiUrl}/hello-node`, data => {
-        txtLambdaOuput.val(data);
+    $.get(`${_config.apiUrl}/${endpoint}`, data => {
+        txtLambdaOuput.val(data.message);
         pSpinner.hide();
     });
-});
+}
 
-$('#btnTestPythonLambda').click(() => {
-    pSpinner.show();
-    $.get(`${_config.apiUrl}/hello-python`, data => {
-        txtLambdaOuput.val(data);
-        pSpinner.hide();
-    });
-});
-
+$('#btnTestNodeLambda').click(() => handleApiClick('hello-node'));
+$('#btnTestPythonLambda').click(() => handleApiClick('hello-python'));
 $('#btnClearLambdaOutput').click(() => txtLambdaOuput.val(''));

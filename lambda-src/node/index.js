@@ -5,11 +5,11 @@
 const LambdaResponse = require('./lib/model/lambda-response');
 
 async function helloHandler() {
-    return new LambdaResponse(JSON.stringify('Hello from Lambda Node!'));
+    return new LambdaResponse('Hello from Lambda Node!');
 }
 
 async function lotteryHandler() {
-    return new LambdaResponse(JSON.stringify('TODO: random lottery numbers'));
+    return new LambdaResponse('TODO: random lottery numbers');
 }
 
 exports.helloHandler = helloHandler;

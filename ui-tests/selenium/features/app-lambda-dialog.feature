@@ -5,3 +5,5 @@ Feature: AWS Serverless App Lambda Dialog
     When I click on the Lambda dialog open button
     Then The Lambda dialog is displayed
 
+# TODO: test the clicks on the Lambda buttons
+

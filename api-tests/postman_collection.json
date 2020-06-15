@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "dac02736-3948-4cf0-93e7-43992f5f43b1",
-		"name": "AwdServerlessAppApi",
+		"name": "AwsServerlessAppApi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -22,7 +22,9 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body('\"Hello from Lambda Node!\"');\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).to.eql(true);\r",
+							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Node!\");\r",
 							"});"
 						],
 						"type": "text/javascript"
