@@ -138,4 +138,5 @@ test-results
 # Any compressed zip files
 *.zip
 
-output
+# Selenium screenshots, page sources and logs
+selenium-output

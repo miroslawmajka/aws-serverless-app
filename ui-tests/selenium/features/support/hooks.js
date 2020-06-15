@@ -2,7 +2,7 @@ const { After } = require('cucumber');
 
 const FAILED_STATUS = 'failed';
 
-After((scenario) => {
+After(scenario => {
     if (scenario.result.status === FAILED_STATUS) {
         takeScreenshot(browser);
         savePageSource(browser);
@@ -16,9 +16,7 @@ const SCREENSHOTS_DIR = './output/screenshots';
 const PAGE_SOURCES_DIR = './output/page-sources';
 
 function takeScreenshot(browser) {
-    const screenshotFileName = `SCREENSHOT_${getBrowserName(
-        browser
-    )}_${getTimestamp()}.png`;
+    const screenshotFileName = `SCREENSHOT_${getBrowserName(browser)}_${getTimestamp()}.png`;
     const screenshotPath = `${SCREENSHOTS_DIR}/${screenshotFileName}`;
 
     try {
@@ -32,9 +30,7 @@ function takeScreenshot(browser) {
 }
 
 function savePageSource(browser) {
-    const pageSourceFileName = `PAGE_SOURCE_${getBrowserName(
-        browser
-    )}_${getTimestamp()}.html`;
+    const pageSourceFileName = `PAGE_SOURCE_${getBrowserName(browser)}_${getTimestamp()}.html`;
     const pageSourcePath = `${PAGE_SOURCES_DIR}/${pageSourceFileName}`;
 
     try {

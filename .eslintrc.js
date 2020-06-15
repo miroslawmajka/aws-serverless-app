@@ -20,77 +20,47 @@ module.exports = {
         'no-unused-vars': [
             'error',
             {
-                'args': 'none'
+                args: 'none'
             }
         ],
         indent: [
             'error',
             4,
             {
-                'SwitchCase': 1
+                SwitchCase: 1
             }
         ],
-        quotes: [
-            'error',
-            'single'
-        ],
-        'quote-props': [
-            'error',
-            'as-needed'
-        ],
-        semi: [
-            'error',
-            'always'
-        ],
-        strict: [
-            'error',
-            'global'
-        ],
-        'arrow-parens': [
-            'error',
-            'as-needed'
-        ],
-        'comma-dangle': [
-            'error',
-            'never'
-        ],
-        'space-before-function-paren': [
-            'error',
-            'never'
-        ],
-        'object-curly-spacing': [
-            'error',
-            'always'
-        ],
-        'space-in-parens': [
-            'error',
-            'never'
-        ],
-        'array-bracket-spacing': [
-            'error',
-            'never'
-        ],
+        quotes: ['error', 'single'],
+        'quote-props': ['error', 'as-needed'],
+        semi: ['error', 'always'],
+        strict: ['error', 'global'],
+        'arrow-parens': ['error', 'as-needed'],
+        'comma-dangle': ['error', 'never'],
+        'space-before-function-paren': ['error', 'never'],
+        'object-curly-spacing': ['error', 'always'],
+        'space-in-parens': ['error', 'never'],
+        'array-bracket-spacing': ['error', 'never'],
         'no-multiple-empty-lines': [
             'error',
             {
-                'max': 1,
-                'maxEOF': 0,
-                'maxBOF': 0
+                max: 1,
+                maxEOF: 0,
+                maxBOF: 0
             }
         ],
         'comma-spacing': [
             'error',
             {
-                'before': false,
-                'after': true
+                before: false,
+                after: true
             }
         ],
         'space-before-blocks': [
             'error',
             {
-                'functions': 'always',
-                'keywords': 'always',
-                'classes': 'always'
+                functions: 'always',
+                keywords: 'always',
+                classes: 'always'
             }
         ]
     }

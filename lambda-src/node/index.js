@@ -1,7 +1,7 @@
 /**
  * Entry point for all Node Lambda handlers
  */
- 
+
 const LambdaResponse = require('./lib/model/lambda-response');
 
 async function handler() {
