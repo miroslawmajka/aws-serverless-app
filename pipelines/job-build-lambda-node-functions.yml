@@ -34,7 +34,7 @@ jobs:
     inputs: 
       codeCoverageTool: Cobertura
       summaryFileLocation: $(NODE_CODE_PATH)/coverage/*coverage.xml
-      reportDirectory: $(NODE_CODE_PATH)/coverage
+      # reportDirectory: $(NODE_CODE_PATH)/coverage
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
