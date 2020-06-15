@@ -18,7 +18,7 @@ jobs:
     workingDirectory: $(NODE_CODE_PATH)
   
   - script: npm test
-    displayName: Run linting, unit tests and coverage
+    displayName: Run linting unit tests coverage
     workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishTestResults@2
@@ -42,15 +42,7 @@ jobs:
       pathToPublish: $(TEST_RESULTS)
       ArtifactName: $(LAMBDA_NODE_TEST_RESULTS_ARTIFACT)
 
-  - script: |
-      rm -rf node_modules
-      mkdir node_modules
-      npm install --production
-      rm -rf $(LAMBDA_NODE_FUNCTIONS_ZIP)
-      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) index.js
-      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) lib      
-      zip -rq $(LAMBDA_NODE_FUNCTIONS_ZIP) node_modules
-    displayName: Build deployable artifact
+  - script: sh create-node-lambda-artifact.sh $(LAMBDA_NODE_FUNCTIONS_ZIP)
     workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishBuildArtifacts@1
