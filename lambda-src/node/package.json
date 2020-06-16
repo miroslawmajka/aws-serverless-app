@@ -5,8 +5,9 @@
     "main": "index.js",
     "scripts": {
         "lint": "eslint --color .",
-        "mocha": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml",
-        "nyc": "nyc --reporter=cobertura npm run mocha",
+        "mocha": "mocha --recursive test",
+        "mocha-junit": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml",
+        "nyc": "nyc --reporter=cobertura npm run mocha-junit",
         "coverage": "nyc report && nyc report --reporter=text-summary",
         "test": "npm run lint && npm run nyc && npm run coverage"
     },

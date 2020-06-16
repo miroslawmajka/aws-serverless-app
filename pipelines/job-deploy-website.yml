@@ -11,7 +11,7 @@ jobs:
 
   - script: |
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      sh unix-scripts/deploy-website.sh $WEBSITE_BUCKET_NAME $API_URL $(ENVIRONMENT_NAME)
+      sh deploy-website.sh $WEBSITE_BUCKET_NAME $API_URL $(ENVIRONMENT_NAME)
     displayName: Upload static website files to S3 bucket
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
