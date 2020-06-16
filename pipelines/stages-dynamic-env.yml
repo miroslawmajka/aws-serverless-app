@@ -7,7 +7,7 @@ stages:
 - stage: SetupAwsInfrastrcture
   displayName: Setup AWS Infrastrcture
   jobs:
-  - template: jobs-build-aws-infrastructure.yml
+  - template: job-build-aws-infrastructure.yml
       
 - stage: DeployApp
   displayName: Deploy App
@@ -23,4 +23,4 @@ stages:
   displayName: AWS Cleanup
   condition: always()
   jobs:
-  - template: jobs-destroy-aws-infrastructure.yml
+  - template: job-destroy-aws-infrastructure.yml

@@ -8,7 +8,7 @@ jobs:
   - name: TEST_RESULTS
     value: $(API_TESTS_PATH)/$(TEST_RESULTS_PATH)
   - name: POSTMAN_TEST_RESULTS_ARTIFACT
-    value: postman-results-$(Build.BuildNumber)
+    value: postman-test-results-$(Build.BuildNumber)
 
   steps:
   - template: step-install-node.yml
@@ -18,12 +18,11 @@ jobs:
       artifactName: $(TF_ARTIFACT_NAME)
     displayName: Download Terraform output artifact
   
-  # Copy the saved Terraform output variables as a local ".env" file, install Newman, update the Postman environment file and run the collection
   - script: |
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
       npm install
       npm run build-env-file
-    displayName: Setup Newman environment file
+    displayName: Setup Postman environment file
     workingDirectory: $(API_TESTS_PATH)
 
   - script: sh run-newman-tests.sh $(TEST_RESULTS)

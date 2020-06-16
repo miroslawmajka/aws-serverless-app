@@ -2,6 +2,14 @@ jobs:
 - job: TestWebsiteSelenium
   displayName: Test App with Selenium
 
+  variables:
+  - name: UI_TESTS_PATH
+    value: $(Build.SourcesDirectory)/ui-tests/selenium
+  - name: SELENIUM_TEST_RESULTS_ARTIFACT
+    value: selenium-test-results-$(Build.BuildNumber)
+  - name: SELENIUM_OUTPUT_ARTIFACT
+    value: selenium-output-$(Build.BuildNumber)
+
   steps:
   - template: step-install-node.yml
 
@@ -12,17 +20,17 @@ jobs:
 
   - script: npm install
     displayName: Restore npm modules
-    workingDirectory: ui-tests/selenium
+    workingDirectory: $(UI_TESTS_PATH)
 
   - script: npm run lint
     displayName: Lint JavaScript
-    workingDirectory: ui-tests/selenium
+    workingDirectory: $(UI_TESTS_PATH)
 
   - script: |  
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
       npm test
     displayName: Run Selenium tests
-    workingDirectory: ui-tests/selenium
+    workingDirectory: $(UI_TESTS_PATH)
     env:
       HEADLESS_CHROME: "true"
 
@@ -32,18 +40,18 @@ jobs:
     inputs:
       testRunTitle: Selenium Tets Results
       testResultsFormat: JUnit
-      testResultsFiles: ui-tests/selenium/test-results/*.xml
+      testResultsFiles: $(UI_TESTS_PATH)/test-results/*.xml
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish Selenium results artifact
+    displayName: Publish $(SELENIUM_TEST_RESULTS_ARTIFACT) artifact
     inputs:
-      pathToPublish: ui-tests/selenium/test-results
-      ArtifactName: selenium-test-results-artifact-$(Build.BuildNumber)
+      pathToPublish: $(UI_TESTS_PATH)/test-results
+      ArtifactName: $(SELENIUM_TEST_RESULTS_ARTIFACT)
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish Selenium output artifact
+    displayName: Publish $(SELENIUM_OUTPUT_ARTIFACT) artifact
     inputs:
-      pathToPublish: ui-tests/selenium/selenium-output
-      ArtifactName: selenium-output-artifact-$(Build.BuildNumber)    
+      pathToPublish: $(UI_TESTS_PATH)/selenium-output
+      ArtifactName: $(SELENIUM_OUTPUT_ARTIFACT)  

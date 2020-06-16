@@ -4,6 +4,7 @@ jobs:
   steps:
   - template: steps-terraform-secure-files.yml
 
+  # TODO: move to unix scripts
   - script: |    
       terraform init -backend-config="aws-s3-backend.tfconfig"
       sh select-workspace.sh $(ENVIRONMENT_NAME)

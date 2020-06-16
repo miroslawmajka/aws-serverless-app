@@ -5,6 +5,7 @@ LAMBDA_NODE_FUNCTIONS_ZIP=lambda-node-functions.zip
 
 cd terraform
 
+# TODO: move into separate script
 terraform init -backend-config="aws-s3-backend.tfconfig"
 terraform validate
 sh select-workspace.sh ${ENVIRONMENT_NAME}

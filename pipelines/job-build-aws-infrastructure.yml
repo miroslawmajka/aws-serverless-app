@@ -4,6 +4,7 @@ jobs:
   steps:
   - template: steps-terraform-secure-files.yml
 
+  # TODO: refactor into unix script
   - script: |    
       terraform init -backend-config="aws-s3-backend.tfconfig"
       terraform validate
