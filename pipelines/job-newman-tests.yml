@@ -19,7 +19,7 @@ jobs:
     displayName: Download Terraform output artifact
   
   - script: |
-      cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
+      cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) ${DOTENV_FILE}
       npm install
       npm run build-env-file
     displayName: Setup Postman environment file

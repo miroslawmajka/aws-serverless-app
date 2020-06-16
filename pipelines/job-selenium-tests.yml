@@ -27,7 +27,7 @@ jobs:
     workingDirectory: $(UI_TESTS_PATH)
 
   - script: |  
-      cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) .env
+      cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) ${DOTENV_FILE}
       npm test
     displayName: Run Selenium tests
     workingDirectory: $(UI_TESTS_PATH)

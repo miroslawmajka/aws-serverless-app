@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
 
 ENVIRONMENT_NAME=default
+DOTENV_FILE=.env
 LAMBDA_NODE_FUNCTIONS_ZIP=lambda-node-functions.zip
 
 cd terraform
 
-# TODO: move into separate script
-terraform init -backend-config="aws-s3-backend.tfconfig"
-terraform validate
-sh select-workspace.sh ${ENVIRONMENT_NAME}
-terraform plan -out ${ENVIRONMENT_NAME}.tfplan
-terraform apply "${ENVIRONMENT_NAME}.tfplan"
+sh tf-apply.sh ${ENVIRONMENT_NAME} aws-s3-backend.tfconfig ${DOTENV_FILE}
 
-WEBSITE_BUCKET_NAME=`terraform output website_bucket_name`
-API_URL=`terraform output serverless_rest_api_base_url`
-WEBSITE_URL=`terraform output website_url`
-DEPLOYMENT_BUCKET_NAME=`terraform output deployment_bucket_name`
-LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name`
+source ${DOTENV_FILE}
 
 cd -
 

@@ -1,9 +1,9 @@
  steps:
   - task: DownloadSecureFile@1
     name: "tfconfig"
-    displayName: 'Downlaod secure aws-s3-backend.tfconfig file'
+    displayName: Downlaod secure ${TF_BACKEND_CONFIG_NAME} file
     inputs:
-      secureFile: aws-s3-backend.tfconfig
+      secureFile: ${TF_BACKEND_CONFIG_NAME}
 
   - task: DownloadSecureFile@1
     name: "tfvars"
@@ -12,7 +12,7 @@
       secureFile: terraform.tfvars
 
   - script: |
-      cp $(tfconfig.secureFilePath) terraform/aws-s3-backend.tfconfig
+      cp $(tfconfig.secureFilePath) terraform/${TF_BACKEND_CONFIG_NAME}
       cp $(tfvars.secureFilePath) terraform/terraform.tfvars
     displayName: Copy secure files to terraform directory
 

@@ -1,25 +1,16 @@
 jobs:
 - job: TerraformApply
   displayName: Terraform Apply
+
   steps:
   - template: steps-terraform-secure-files.yml
 
-  # TODO: refactor into unix script
   - script: |    
-      terraform init -backend-config="aws-s3-backend.tfconfig"
-      terraform validate
-      sh select-workspace.sh $(ENVIRONMENT_NAME)
-      terraform plan -out $(ENVIRONMENT_NAME).tfplan
-      terraform apply "$(ENVIRONMENT_NAME).tfplan"
+      sh tf-apply.sh $(ENVIRONMENT_NAME) ${TF_BACKEND_CONFIG_NAME} $(DOTENV_FILE)
 
       mkdir -p $(TF_ARTIFACT_PATH)
 
-      echo WEBSITE_BUCKET_NAME=`terraform output website_bucket_name` > $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo API_URL=`terraform output serverless_rest_api_base_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo WEBSITE_URL=`terraform output website_url` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo LAMBDA_PYTHON_HELLO_NAME=`terraform output lambda_python_hello_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo DEPLOYMENT_BUCKET_NAME=`terraform output deployment_bucket_name` >> $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      cp $(DOTENV_FILE) $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
     displayName: Create $(ENVIRONMENT_NAME) environment
     workingDirectory: terraform
     env: 

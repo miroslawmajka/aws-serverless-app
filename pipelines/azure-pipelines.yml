@@ -17,6 +17,12 @@ variables:
 
 - name: TEST_RESULTS_PATH
   value: test-results/junit.xml
+
+- name: DOTENV_FILE
+  value: .env
+
+- name: TF_BACKEND_CONFIG_NAME
+  value: aws-s3-backend.tfconfig
   
 - name: TF_ARTIFACT_NAME
   value: terraform-variables-$(Build.BuildNumber)

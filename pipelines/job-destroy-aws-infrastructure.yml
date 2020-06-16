@@ -4,13 +4,9 @@ jobs:
   steps:
   - template: steps-terraform-secure-files.yml
 
-  # TODO: move to unix scripts
   - script: |    
-      terraform init -backend-config="aws-s3-backend.tfconfig"
-      sh select-workspace.sh $(ENVIRONMENT_NAME)
-      terraform destroy -auto-approve
-      terraform workspace select default
-      terraform workspace delete $(ENVIRONMENT_NAME)
+      sh tf-destroy.sh $(ENVIRONMENT_NAME) ${TF_BACKEND_CONFIG_NAME}
+      sh tf-delete-workspace.sh $(ENVIRONMENT_NAME)
     displayName: Destroy $(ENVIRONMENT_NAME) environment
     workingDirectory: terraform
     env: 
