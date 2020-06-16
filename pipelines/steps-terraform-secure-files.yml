@@ -3,7 +3,7 @@
     name: "tfconfig"
     displayName: Downlaod secure ${TF_BACKEND_CONFIG_NAME} file
     inputs:
-      secureFile: ${TF_BACKEND_CONFIG_NAME}
+      secureFile: aws-s3-backend.tfconfig # this value needs to be hardcoded to be authorized
 
   - task: DownloadSecureFile@1
     name: "tfvars"
