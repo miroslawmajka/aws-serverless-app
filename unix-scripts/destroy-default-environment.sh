@@ -3,6 +3,7 @@
 cd terraform
 
 sh tf-destroy.sh ${ENVIRONMENT_NAME} aws-s3-backend.tfconfig
+rm -f .env
 
 cd -
 
