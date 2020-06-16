@@ -1,1 +1,0 @@
-# Research https://www.cypress.io/

@@ -1,0 +1,17 @@
+{
+    "name": "cypress-tests",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [
+        "cypress",
+        "testing"
+    ],
+    "author": "Miroslaw Majka",
+    "license": "MIT",
+    "scripts": {
+        "open": "cypress open"
+    },
+    "devDependencies": {
+        "cypress": "^4.8.0"
+    }
+}

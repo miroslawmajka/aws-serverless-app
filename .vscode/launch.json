@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Selenium Tests",
             "runtimeExecutable": "npm",
-            "cwd": "${workspaceFolder}/ui-tests/selenium",
+            "cwd": "${workspaceFolder}/ui-tests/selenium-tests",
             "runtimeArgs": ["test"],
             "port": 5859,
             "env": {

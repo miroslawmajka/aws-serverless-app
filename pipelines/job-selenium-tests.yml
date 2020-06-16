@@ -4,7 +4,7 @@ jobs:
 
   variables:
   - name: UI_TESTS_PATH
-    value: $(Build.SourcesDirectory)/ui-tests/selenium
+    value: $(Build.SourcesDirectory)/ui-tests/selenium-tests
   - name: SELENIUM_TEST_RESULTS_ARTIFACT
     value: selenium-test-results-$(Build.BuildNumber)
   - name: SELENIUM_OUTPUT_ARTIFACT
