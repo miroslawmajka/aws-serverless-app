@@ -44,6 +44,7 @@ jobs:
 
   - script: sh create-node-lambda-artifact.sh $(LAMBDA_NODE_FUNCTIONS_ZIP)
     workingDirectory: $(NODE_CODE_PATH)
+    displayName: Create $(LAMBDA_NODE_FUNCTIONS_ZIP) artifact
 
   - task: PublishBuildArtifacts@1
     displayName: Publish $(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME) artifact
