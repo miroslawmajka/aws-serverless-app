@@ -29,7 +29,6 @@
             <div class="w3-padding-32">
                 <button id="btnLambdaDialogOpen"
                     class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
-                    onclick="document.getElementById('dlgLambdaDialog').style.display='block'" 
                     style="font-weight:900;">Open Lambda Test Dialog</button>
             </div>
         </div>
@@ -39,8 +38,7 @@
     <div id="dlgLambdaDialog" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
             <header class="w3-container w3-theme-l1">
-                <span onclick="document.getElementById('dlgLambdaDialog').style.display='none'"
-                    class="w3-button w3-display-topright">×</span>
+                <span id="btnDialogClose" class="w3-button w3-display-topright">×</span>
                 <h4>Lambda Test Dialog</h4>
             </header>
             <div class="w3-padding">

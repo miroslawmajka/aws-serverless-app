@@ -6,6 +6,7 @@ class HomePage extends Page {
 
         this.selectorOpenDialogButton = '#btnLambdaDialogOpen';
         this.selectorLambdaDialog = '#dlgLambdaDialog';
+        this.selectorOutputBox = '#txtLambdaOuput';
     }
 
     navigate() {
@@ -18,14 +19,24 @@ class HomePage extends Page {
         const openDialogButton = $(this.selectorOpenDialogButton);
 
         openDialogButton.click();
+
+        return this;
     }
 
-    lambdaDialogIsDisplayed() {
+    isLambdaDialogDisplayed() {
         const lambdaDialog = $(this.selectorLambdaDialog);
 
         lambdaDialog.waitForDisplayed();
 
         return lambdaDialog.isDisplayed();
+    }
+
+    isOutputBoxCleared() {
+        const outputBox = $(this.selectorOutputBox);
+
+        outputBox.waitForDisplayed();
+
+        return outputBox.getValue() === '';
     }
 }
 

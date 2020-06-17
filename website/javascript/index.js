@@ -86,6 +86,16 @@ $('#btnTestNodeLotteryLambda').click(() => handleApiClick('lottery-node'));
 $('#btnTestPythonHelloLambda').click(() => handleApiClick('hello-python'));
 $('#btnClearLambdaOutput').click(() => setOutput());
 
+$('#btnLambdaDialogOpen').click(() => {
+    setOutput();
+    $('#dlgLambdaDialog').css('display', 'block');
+});
+
+$('#btnDialogClose').click(() => {
+    setOutput();
+    $('#dlgLambdaDialog').css('display', 'none');
+});
+
 function handleApiClick(endpoint) {
     const pSpinner = $('#pSpinner');
 

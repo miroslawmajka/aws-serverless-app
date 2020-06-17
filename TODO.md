@@ -5,7 +5,6 @@ Objectives to achieve before making the project public
 -   lottery Node function
     -   source code dev using Docker / SAM / Lambda tools
     -   unit tests
-    -   better IDs in the DOM for selectors
     -   postman test
     -   selenium test
 -   python functions deployment

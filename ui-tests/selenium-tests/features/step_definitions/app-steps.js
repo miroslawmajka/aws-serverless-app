@@ -9,16 +9,24 @@ Given(/^I open the base URL$/, function () {
     this.scenarioContext.currentPage = homePage.navigate();
 });
 
-When(/^I click on the Lambda dialog open button$/, function () {
+When(/^I click the "([^"]*)" button$/, function (buttonName) {
     const homePage = this.scenarioContext.currentPage;
+
+    // TODO: create a button map that will run a click based upon "buttonName"
 
     homePage.clickLambdaDialogOpen();
 });
 
-Then(/^The Lambda dialog is displayed$/, function () {
+Then(/^The lambda dialog is "(displayed|hidden)"$/, function (displayedOrHidden) {
     const homePage = this.scenarioContext.currentPage;
 
-    const isDisplayed = homePage.lambdaDialogIsDisplayed();
+    const isDisplayed = homePage.isLambdaDialogDisplayed();
 
-    expect(isDisplayed).to.equal(true);
+    expect(isDisplayed).to.equal(displayedOrHidden === 'displayed');
+});
+
+Then(/^The output box is cleared$/, function () {
+    const homePage = new HomePage();
+
+    expect(homePage.isOutputBoxCleared()).to.equal(true);
 });
