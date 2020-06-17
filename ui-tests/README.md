@@ -2,5 +2,5 @@
 
 ## README Contents
 
--   [Selenium UI Tests](selenium/README.md)
--   [Cypress UI Tests](cypress/README.md)
+-   [Selenium UI Tests](selenium-tests/README.md)
+-   [Cypress UI Tests](cypress-tests/README.md)

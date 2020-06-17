@@ -1,6 +1,6 @@
 # Using Terraform
 
-Make a copy of `aws-s3-backend.tfconfig.example` and name it `aws-s3-backend.tfconfig`. 
+Make a copy of `aws-s3-backend.tfconfig.example` and name it `aws-s3-backend.tfconfig`.
 
 Make a copy of `terraform.tfvars.example` and name it `terraform.tfvars`.
 
@@ -16,10 +16,11 @@ terraform apply "yourenvname.tfplan"
 This will create the environment giving you the S3 bucket URL to access the website.
 
 To bring the environment down run the following command:
+
 ```bash
 terraform destroy -auto-approve
 terraform workspace select default
 terraform workspace delete yourenvname
 ```
 
-These will remove any resources created in AWS and alse remove the "ENV_NAME" workspace locally.
+These will remove any resources created in AWS and alse remove the "yourenvname" workspace locally.

@@ -43,3 +43,4 @@ jobs:
       pathToPublish: $(TEST_RESULTS)
       ArtifactName: $(POSTMAN_TEST_RESULTS_ARTIFACT)
     displayName: Publish $(POSTMAN_TEST_RESULTS_ARTIFACT) artifact
+    

@@ -14,7 +14,7 @@ Using the [W3 Schools](https://www.w3schools.com/w3css/w3css_templates.asp) temp
 -   [API Tests](api-tests/README.md)
 -   [UI Tests](ui-tests/README.md)
 
-## Setting up the default environment
+## Setting up the default AWS environment
 
 Run:
 
@@ -24,7 +24,7 @@ sh setup-default-environment.sh
 
 This will deploy the application to AWS and return the URL at which you can access the website.
 
-## Bringing the default environment down
+## Bringing the default AWS environment down
 
 Run:
 

@@ -1,4 +1,5 @@
 jobs:
 - template: job-test-newman.yml
 - template: job-test-selenium.yml
+# TODO: re-enable job when ready
 # - template: job-test-cypress.yml
