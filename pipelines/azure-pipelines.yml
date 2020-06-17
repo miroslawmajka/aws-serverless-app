@@ -11,26 +11,20 @@ pool:
 
 variables:
 - group: AwsCredentials
-
 - name: ENVIRONMENT_NAME
   value: dynamic-env-$(Build.BuildID)
-
 - name: TEST_RESULTS_PATH
   value: test-results/junit.xml
-
 - name: DOTENV_FILE
   value: .env
-
 - name: TF_BACKEND_CONFIG_NAME
-  value: aws-s3-backend.tfconfig
-  
+  value: aws-s3-backend.tfconfig  
 - name: TF_ARTIFACT_NAME
   value: terraform-variables-$(Build.BuildNumber)
 - name: TF_OUTPUT_VARS
   value: variables.txt
 - name: TF_ARTIFACT_PATH
   value: $(System.ArtifactsDirectory)/$(TF_ARTIFACT_NAME)
-
 - name: LAMBDA_NODE_DEPLOY_ARTIFACT_NAME
   value: lambda-node-deploy-artifact-$(Build.BuildNumber)
 - name: LAMBDA_NODE_FUNCTIONS_ZIP
@@ -39,4 +33,4 @@ variables:
   value: $(System.ArtifactsDirectory)/$(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
 
 stages:
-- template: stages-dynamic-env.yml
+- template: stages-end-to-end.yml

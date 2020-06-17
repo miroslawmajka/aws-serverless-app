@@ -1,0 +1,25 @@
+ steps:
+  - task: DownloadSecureFile@1
+    name: "tfconfig"
+    # The input value needs to be hardcoded to be authorized by the pipeline
+    inputs:
+      secureFile: aws-s3-backend.tfconfig 
+    displayName: Downlaod secure ${TF_BACKEND_CONFIG_NAME} file
+
+  - task: DownloadSecureFile@1
+    name: "tfvars"
+    # The input value needs to be hardcoded to be authorized by the pipeline
+    inputs:
+      secureFile: terraform.tfvars
+    displayName: 'Downlaod secure terraform.tfvars file'
+
+  - script: |
+      cp $(tfconfig.secureFilePath) terraform/${TF_BACKEND_CONFIG_NAME}
+      cp $(tfvars.secureFilePath) terraform/terraform.tfvars
+    displayName: Copy secure files to terraform directory
+
+  # From https://github.com/hashicorp/azure-pipelines-extension-terraform
+  - task: terraformInstaller@0
+    inputs:
+      terraformVersion: 0.12.26
+    displayName: Install Terraform

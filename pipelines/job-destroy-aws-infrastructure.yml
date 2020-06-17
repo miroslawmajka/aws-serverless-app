@@ -2,7 +2,7 @@ jobs:
 - job: TerraformDestroy
   displayName: Terraform Destroy
   steps:
-  - template: steps-terraform-secure-files.yml
+  - template: steps-setup-terraform.yml
 
   - script: |    
       sh tf-destroy.sh $(ENVIRONMENT_NAME) ${TF_BACKEND_CONFIG_NAME}

@@ -2,7 +2,6 @@
 
 Objectives to achieve before making the project public
 
--   remove terraform marketplace task in favour of custom one
 -   lottery Node function
     -   terraform
     -   source code
