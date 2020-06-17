@@ -1,0 +1,17 @@
+trigger: none
+
+name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: GetTerraform
+  steps:
+    - script: |
+        curl "https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip" -o "terraform.zip"
+        unzip terraform.zip
+        mv terraform /usr/local/bin
+        terraform version
+      displayName: Install Terraform
+    
