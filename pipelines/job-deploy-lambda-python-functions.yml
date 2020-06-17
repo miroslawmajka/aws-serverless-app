@@ -1,0 +1,32 @@
+jobs:
+- job: DeployLambdaPythonFunctions
+  displayName: Deploy Lambda Python Functions
+
+  variables:
+  - name: LAMBDA_PYTHON_FUNCTIONS_ZIP_PATH
+    value: $(LAMBDA_PYTHON_DEPLOY_ARTIFACT_PATH)/$(LAMBDA_PYTHON_FUNCTIONS_ZIP)
+
+  steps:  
+  - template: step-install-aws-cli.yml
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: $(TF_ARTIFACT_NAME)
+    displayName: Download Terraform output artifact
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: $(LAMBDA_PYTHON_DEPLOY_ARTIFACT_NAME)
+    displayName: Download Python functions artifact
+
+  - script: |
+      source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+
+      sh upload-lambda-artifact.sh $(LAMBDA_PYTHON_FUNCTIONS_ZIP_PATH) $DEPLOYMENT_BUCKET_NAME $(LAMBDA_PYTHON_FUNCTIONS_ZIP)
+      
+      sh deploy-lambda-artifact.sh $LAMBDA_PYTHON_HELLO_NAME $DEPLOYMENT_BUCKET_NAME $(LAMBDA_PYTHON_FUNCTIONS_ZIP)
+    displayName: Update Python Lambda functions
+    env: 
+      AWS_ACCESS_KEY_ID: $(aws_access_key_id)
+      AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
+      AWS_DEFAULT_REGION: $(region)

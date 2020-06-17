@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Node API Gateway Integration",
+			"name": "Node Hello",
 			"event": [
 				{
 					"listen": "test",
@@ -47,7 +47,47 @@
 			"response": []
 		},
 		{
-			"name": "Python API Gateway Integration",
+			"name": "Node Lottery",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9780d909-581e-4fb5-8042-8f345d24d300",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/hello-node",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"hello-node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Python Hello",
 			"event": [
 				{
 					"listen": "test",
@@ -60,6 +100,12 @@
 							"\r",
 							"pm.test(\"Content-Type is present\", function () {\r",
 							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).to.eql(true);\r",
+							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Python!\");\r",
 							"});\r",
 							""
 						],

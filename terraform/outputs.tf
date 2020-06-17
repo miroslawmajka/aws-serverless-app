@@ -20,10 +20,15 @@ output "deployment_bucket_name" {
 
 output "lambda_node_hello_name" {
   value = module.lambda_node_hello.function_name
-  description = "The AWS Serverless App Node Lambda function name"
+  description = "The AWS Serverless App Node hello Lambda function name"
+}
+
+output "lambda_node_lottery_name" {
+  value = module.lambda_node_lottery.function_name
+  description = "The AWS Serverless App Node lottery Lambda function name"
 }
 
 output "lambda_python_hello_name" {
   value = module.lambda_python_hello.function_name
-  description = "The AWS Serverless App Python Lambda function name"
+  description = "The AWS Serverless App Python hello Lambda function name"
 }

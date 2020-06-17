@@ -20,8 +20,9 @@ terraform plan -out ${ENVIRONMENT_NAME}.tfplan
 terraform apply "${ENVIRONMENT_NAME}.tfplan"
 
 echo WEBSITE_BUCKET_NAME=`terraform output website_bucket_name` > ${DOTENV_FILE}
-echo API_URL=`terraform output serverless_rest_api_base_url` >> ${DOTENV_FILE}
 echo WEBSITE_URL=`terraform output website_url` >> ${DOTENV_FILE}
-echo LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name` >> ${DOTENV_FILE}
-echo LAMBDA_PYTHON_HELLO_NAME=`terraform output lambda_python_hello_name` >> ${DOTENV_FILE}
+echo API_URL=`terraform output serverless_rest_api_base_url` >> ${DOTENV_FILE}
 echo DEPLOYMENT_BUCKET_NAME=`terraform output deployment_bucket_name` >> ${DOTENV_FILE}
+echo LAMBDA_NODE_HELLO_NAME=`terraform output lambda_node_hello_name` >> ${DOTENV_FILE}
+echo LAMBDA_NODE_LOTTERY_NAME=`terraform output lambda_node_lottery_name` >> ${DOTENV_FILE}
+echo LAMBDA_PYTHON_HELLO_NAME=`terraform output lambda_python_hello_name` >> ${DOTENV_FILE}

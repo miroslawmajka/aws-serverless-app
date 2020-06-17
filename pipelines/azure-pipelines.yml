@@ -1,7 +1,7 @@
 # trigger: 
 # - master
 
-# Disabled for now
+# Disabled for now to save on S3 credit in AWS
 trigger: none
 
 name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
@@ -25,12 +25,20 @@ variables:
   value: variables.txt
 - name: TF_ARTIFACT_PATH
   value: $(System.ArtifactsDirectory)/$(TF_ARTIFACT_NAME)
+
 - name: LAMBDA_NODE_DEPLOY_ARTIFACT_NAME
   value: lambda-node-deploy-artifact-$(Build.BuildNumber)
 - name: LAMBDA_NODE_FUNCTIONS_ZIP
   value: lambda-node-functions.zip
 - name: LAMBDA_NODE_DEPLOY_ARTIFACT_PATH
   value: $(System.ArtifactsDirectory)/$(LAMBDA_NODE_DEPLOY_ARTIFACT_NAME)
+
+- name: LAMBDA_PYTHON_DEPLOY_ARTIFACT_NAME
+  value: lambda-python-deploy-artifact-$(Build.BuildNumber)
+- name: LAMBDA_PYTHON_FUNCTIONS_ZIP
+  value: lambda-python-functions.zip
+- name: LAMBDA_PYTHON_DEPLOY_ARTIFACT_PATH
+  value: $(System.ArtifactsDirectory)/$(LAMBDA_PYTHON_DEPLOY_ARTIFACT_NAME)
 
 stages:
 - template: stages-end-to-end.yml

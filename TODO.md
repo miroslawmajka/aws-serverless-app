@@ -3,18 +3,17 @@
 Objectives to achieve before making the project public
 
 -   lottery Node function
-    -   terraform
-    -   source code
+    -   source code dev using Docker / SAM / Lambda tools
     -   unit tests
-    -   website button
+    -   website button with output
+    -   better IDs in the DOM for selectors
     -   postman test
     -   selenium test
 -   python functions deployment
-    -   update Postan test
-    -   update selenium test
+    -   add selenium test
 -   cypress tests
     -   SPIKE run in pipelines
     -   new job as part of the test stage
--   Postman onlien documentation with link
+-   Postman online documentation with link
 -   README updates for all subprojects
 -   making the DevOps project public but with read-only access

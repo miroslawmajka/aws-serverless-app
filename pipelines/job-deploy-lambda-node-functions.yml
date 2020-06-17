@@ -23,9 +23,9 @@ jobs:
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
 
       sh upload-lambda-artifact.sh $(LAMBDA_NODE_FUNCTIONS_ZIP_PATH) $DEPLOYMENT_BUCKET_NAME $(LAMBDA_NODE_FUNCTIONS_ZIP)
+      
       sh deploy-lambda-artifact.sh $LAMBDA_NODE_HELLO_NAME $DEPLOYMENT_BUCKET_NAME $(LAMBDA_NODE_FUNCTIONS_ZIP)
-
-# "TOOD: run the above call for all node lambda functions"
+      sh deploy-lambda-artifact.sh $LAMBDA_NODE_LOTTERY_NAME $DEPLOYMENT_BUCKET_NAME $(LAMBDA_NODE_FUNCTIONS_ZIP)
     displayName: Update Node Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
