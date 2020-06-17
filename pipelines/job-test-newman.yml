@@ -1,6 +1,6 @@
 jobs:
-- job: TestApiPostman
-  displayName: Test App API with Postman
+- job: TestPostman
+  displayName: Test API with Postman
 
   variables:
   - name: API_TESTS_PATH
@@ -22,8 +22,8 @@ jobs:
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) ${DOTENV_FILE}
       npm install
       npm run build-env-file
-    displayName: Setup Postman environment file
     workingDirectory: $(API_TESTS_PATH)
+    displayName: Setup Postman environment file
 
   - script: sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
@@ -31,15 +31,15 @@ jobs:
 
   - task: PublishTestResults@2
     condition: succeededOrFailed()
-    displayName: Publish Postman test results
     inputs:
       testRunTitle: Postman Results
       testResultsFormat: JUnit
       testResultsFiles: $(TEST_RESULTS)
+    displayName: Publish Postman test results
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish $(POSTMAN_TEST_RESULTS_ARTIFACT) artifact
     inputs:
       pathToPublish: $(TEST_RESULTS)
       ArtifactName: $(POSTMAN_TEST_RESULTS_ARTIFACT)
+    displayName: Publish $(POSTMAN_TEST_RESULTS_ARTIFACT) artifact

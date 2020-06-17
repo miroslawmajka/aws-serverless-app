@@ -1,10 +1,4 @@
 jobs:
-- template: job-newman-tests.yml
-- template: job-selenium-tests.yml
-
-# - job: TestWebsiteCypress
-#   displayName: Test App website with Cypress
-#   steps:
-#   - script: |
-#       echo "TODO: run Cypress"
-#     displayName: Run Cypress
+- template: job-test-newman.yml
+- template: job-test-selenium.yml
+# - template: job-test-cypress.yml

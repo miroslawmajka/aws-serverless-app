@@ -1,6 +1,6 @@
 jobs:
-- job: TestWebsiteSelenium
-  displayName: Test App with Selenium
+- job: TestSelenium
+  displayName: Test Website with Selenium
 
   variables:
   - name: UI_TESTS_PATH
@@ -19,39 +19,39 @@ jobs:
     displayName: Download Terraform output artifact
 
   - script: npm install
-    displayName: Restore npm modules
     workingDirectory: $(UI_TESTS_PATH)
+    displayName: Restore npm modules
 
   - script: npm run lint
-    displayName: Lint JavaScript
     workingDirectory: $(UI_TESTS_PATH)
+    displayName: Lint JavaScript
 
   - script: |  
       cp $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS) ${DOTENV_FILE}
       npm test
-    displayName: Run Selenium tests
     workingDirectory: $(UI_TESTS_PATH)
     env:
       HEADLESS_CHROME: "true"
+    displayName: Run Selenium tests
 
   - task: PublishTestResults@2
     condition: succeededOrFailed()
-    displayName: Publish test results
     inputs:
       testRunTitle: Selenium Tets Results
       testResultsFormat: JUnit
       testResultsFiles: $(UI_TESTS_PATH)/test-results/*.xml
+    displayName: Publish test results
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish $(SELENIUM_TEST_RESULTS_ARTIFACT) artifact
     inputs:
       pathToPublish: $(UI_TESTS_PATH)/test-results
       ArtifactName: $(SELENIUM_TEST_RESULTS_ARTIFACT)
+    displayName: Publish $(SELENIUM_TEST_RESULTS_ARTIFACT) artifact
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
-    displayName: Publish $(SELENIUM_OUTPUT_ARTIFACT) artifact
     inputs:
       pathToPublish: $(UI_TESTS_PATH)/selenium-output
       ArtifactName: $(SELENIUM_OUTPUT_ARTIFACT)  
+    displayName: Publish $(SELENIUM_OUTPUT_ARTIFACT) artifact
