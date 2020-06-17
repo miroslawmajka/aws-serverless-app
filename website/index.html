@@ -27,29 +27,29 @@
             <h4 id="envName">ENVIRONMENT_NAME</h4>
             <h1 class="w3-xxxlarge w3-animate-bottom">AWS Serverless App</h1>
             <div class="w3-padding-32">
-                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
-                    onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Open Lambda Test Dialog</button>
+                <button id="btnLambdaDialogOpen"
+                    class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
+                    onclick="document.getElementById('dlgLambdaDialog').style.display='block'" 
+                    style="font-weight:900;">Open Lambda Test Dialog</button>
             </div>
         </div>
     </header>
 
     <!-- Modal -->
-    <div id="id01" class="w3-modal">
+    <div id="dlgLambdaDialog" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
             <header class="w3-container w3-theme-l1">
-                <span onclick="document.getElementById('id01').style.display='none'"
+                <span onclick="document.getElementById('dlgLambdaDialog').style.display='none'"
                     class="w3-button w3-display-topright">×</span>
                 <h4>Lambda Test Dialog</h4>
             </header>
             <div class="w3-padding">
-                <a class="w3-btn" id="btnTestNodeLambda"">Test Node Lambda</a>
-                <a class="w3-btn" id="btnTestPythonLambda"">Test Python Lambda</a>
+                <a class="w3-btn" id="btnTestNodeHelloLambda"">Node Hello Lambda</a>
+                <a class="w3-btn" id="btnTestNodeLotteryLambda"">Node Lottery Lambda</a>
+                <a class="w3-btn" id="btnTestPythonHelloLambda"">Python Hello Lambda</a>
                 <a class="w3-btn" id="btnClearLambdaOutput"">Clear Output</a>
 
                 <input class="w3-input" type="text" id="txtLambdaOuput" disabled="true">
-
-                <!-- <p>Cool huh? Ok, enough teasing around..</p>
-                <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p> -->
             </div>
             <footer class="w3-container w3-theme-l1">
                 <p id="pApiUrl" style="float:left;">API URL</p>
@@ -335,7 +335,6 @@
     </div>
 
     <div class="w3-row-padding">
-
         <div class="w3-half">
             <form class="w3-container w3-card-4">
                 <h2>Input Form</h2>
@@ -401,7 +400,6 @@
 
     <h2 class="w3-center">Progress Bars</h2>
     <div class="w3-container">
-
         <div class="w3-light-gray">
             <div id="myBar" class="w3-center w3-padding w3-theme" style="width:5%">5%</div>
         </div><br>
@@ -411,7 +409,6 @@
 
     <h2 class="w3-center">Slideshows</h2>
     <div class="w3-content" style="max-width:800px;position:relative">
-
         <img class="mySlides w3-animate-opacity" src="images/snow.jpg" style="width:100%">
         <img class="mySlides w3-animate-opacity" src="images/lights.jpg" style="width:100%">
         <img class="mySlides w3-animate-opacity" src="images/mountains.jpg" style="width:100%">
@@ -513,36 +510,8 @@
             <a class="w3-button w3-circle w3-large w3-theme"><i class="fa fa-plus"></i></a>
             <a class="w3-button w3-circle w3-large w3-card-4"><i class="fa fa-plus"></i></a>
         </div>
-        <br>
-        <div class="w3-center">
-            <div class="w3-dropdown-hover">
-                <button class="w3-button w3-theme">Dropdown <i class="fa fa-caret-down"></i></button>
-                <div class="w3-dropdown-content w3-bar-block w3-border">
-                    <a href="#" class="w3-bar-item w3-button">Link 1</a>
-                    <a href="#" class="w3-bar-item w3-button">Link 2</a>
-                    <a href="#" class="w3-bar-item w3-button">Link 3</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <hr>
-    <div class="w3-center">
-        <h2>Pagination</h2>
-        <!-- Pagination -->
-        <div class="w3-center w3-padding-32">
-            <div class="w3-bar">
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">«</a>
-                <a href="#" class="w3-bar-item w3-button w3-theme w3-hover-theme">1</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">2</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">3</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">4</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">5</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-theme">»</a>
-            </div>
-        </div>
-    </div>
     <br>
 
     <footer class="w3-container w3-theme-dark w3-padding-16">

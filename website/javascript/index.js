@@ -81,18 +81,25 @@ function move() {
 // Custom logic for the Lambda Test dialog
 $('#envName').text(`Welcome to the ${window._config.envName} environment of`);
 $('#pApiUrl').text(`API URL: ${_config.apiUrl}`);
-
-const txtLambdaOuput = $('#txtLambdaOuput');
-const pSpinner = $('#pSpinner');
+$('#btnTestNodeHelloLambda').click(() => handleApiClick('hello-node'));
+$('#btnTestNodeLotteryLambda').click(() => handleApiClick('lottery-node'));
+$('#btnTestPythonHelloLambda').click(() => handleApiClick('hello-python'));
+$('#btnClearLambdaOutput').click(() => setOutput());
 
 function handleApiClick(endpoint) {
+    const pSpinner = $('#pSpinner');
+
     pSpinner.show();
+
     $.get(`${_config.apiUrl}/${endpoint}`, data => {
-        txtLambdaOuput.val(data.message);
+        setOutput(data.message);
+
         pSpinner.hide();
     });
 }
 
-$('#btnTestNodeLambda').click(() => handleApiClick('hello-node'));
-$('#btnTestPythonLambda').click(() => handleApiClick('hello-python'));
-$('#btnClearLambdaOutput').click(() => txtLambdaOuput.val(''));
+function setOutput(text) {
+    const txtLambdaOuput = $('#txtLambdaOuput');
+
+    txtLambdaOuput.val(text || '');
+}
