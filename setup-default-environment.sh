@@ -13,7 +13,7 @@ source ${DOTENV_FILE}
 
 cd -
 
-deploy-website.sh ${WEBSITE_BUCKET_NAME} ${API_URL} ${ENVIRONMENT_NAME}
+sh deploy-website.sh ${WEBSITE_BUCKET_NAME} ${API_URL} ${ENVIRONMENT_NAME}
 
 cd lambda-src/node
 
@@ -28,7 +28,7 @@ sh create-python-lambda-artifact.sh ${LAMBDA_PYTHON_FUNCTIONS_ZIP}
 cd -
 
 sh upload-lambda-artifact.sh lambda-src/node/${LAMBDA_NODE_FUNCTIONS_ZIP} ${DEPLOYMENT_BUCKET_NAME} ${LAMBDA_NODE_FUNCTIONS_ZIP}
-sh upload-lambda-artifact.sh lambda-src/node/${LAMBDA_PYTHON_FUNCTIONS_ZIP} ${DEPLOYMENT_BUCKET_NAME} ${LAMBDA_PYTHON_FUNCTIONS_ZIP}
+sh upload-lambda-artifact.sh lambda-src/python/${LAMBDA_PYTHON_FUNCTIONS_ZIP} ${DEPLOYMENT_BUCKET_NAME} ${LAMBDA_PYTHON_FUNCTIONS_ZIP}
 
 sh deploy-lambda-artifact.sh ${LAMBDA_NODE_HELLO_NAME} ${DEPLOYMENT_BUCKET_NAME} ${LAMBDA_NODE_FUNCTIONS_ZIP}
 sh deploy-lambda-artifact.sh ${LAMBDA_NODE_LOTTERY_NAME} ${DEPLOYMENT_BUCKET_NAME} ${LAMBDA_NODE_FUNCTIONS_ZIP}
