@@ -12,21 +12,49 @@ Given(/^I open the base URL$/, function () {
 When(/^I click the "([^"]*)" button$/, function (buttonName) {
     const homePage = this.scenarioContext.currentPage;
 
-    // TODO: create a button map that will run a click based upon "buttonName"
-
-    homePage.clickLambdaDialogOpen();
+    homePage.getButton(buttonName).click();
 });
 
 Then(/^The lambda dialog is "(displayed|hidden)"$/, function (displayedOrHidden) {
+    const shouldBeDisplayed = displayedOrHidden === 'displayed';
+
     const homePage = this.scenarioContext.currentPage;
+
+    if (shouldBeDisplayed) {
+        homePage.waitForLambdaDialogDisplayed();
+    } else {
+        homePage.waitForLambdaDialogHidden();
+    }
 
     const isDisplayed = homePage.isLambdaDialogDisplayed();
 
-    expect(isDisplayed).to.equal(displayedOrHidden === 'displayed');
+    expect(isDisplayed).to.equal(shouldBeDisplayed);
 });
 
 Then(/^The output box is cleared$/, function () {
     const homePage = new HomePage();
 
+    homePage.waitForOutputBoxCleared();
+
     expect(homePage.isOutputBoxCleared()).to.equal(true);
+});
+
+Then(/^The output from the call is displayed$/, function () {
+    const homePage = new HomePage();
+
+    homePage.waitForOutputBoxContent();
+
+    const outputContent = homePage.getOutputBoxContent();
+
+    expect(outputContent).not.to.equal(undefined);
+    expect(outputContent).not.to.equal(null);
+    expect(outputContent).not.to.equal('');
+});
+
+Then(/^The output box shows "([^"]*)"$/, function (expectedContent) {
+    const homePage = this.scenarioContext.currentPage;
+
+    const actualContent = homePage.getOutputBoxContent();
+
+    expect(actualContent).to.equal(expectedContent);
 });

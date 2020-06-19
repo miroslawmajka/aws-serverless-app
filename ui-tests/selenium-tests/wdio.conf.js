@@ -24,7 +24,7 @@ if (HEADLESS_CHROME)
 const wdioConfig = {
     sync: true,
     connectionRetryCount: 3,
-    waitforTimeout: HALF_MINUTE / 3,
+    waitforTimeout: HALF_MINUTE / 6,
     connectionRetryTimeout: HALF_MINUTE,
     baseUrl: WEBSITE_URL,
     logLevel: 'warn',

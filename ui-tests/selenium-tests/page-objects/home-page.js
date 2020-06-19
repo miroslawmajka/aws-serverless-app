@@ -1,10 +1,18 @@
 const Page = require('./page');
 
+const {
+    OpenDialogButton,
+    HelloNodeButton,
+    HelloPythonButton,
+    LotteryNodeButton,
+    ClearOutputButton,
+    DialogCloseButton
+} = require('./home-buttons');
+
 class HomePage extends Page {
     constructor() {
         super();
 
-        this.selectorOpenDialogButton = '#btnLambdaDialogOpen';
         this.selectorLambdaDialog = '#dlgLambdaDialog';
         this.selectorOutputBox = '#txtLambdaOuput';
     }
@@ -15,20 +23,30 @@ class HomePage extends Page {
         return this;
     }
 
-    clickLambdaDialogOpen() {
-        const openDialogButton = $(this.selectorOpenDialogButton);
+    waitForLambdaDialogDisplayed() {
+        const lambdaDialog = $(this.selectorLambdaDialog);
 
-        openDialogButton.click();
+        return lambdaDialog.waitForDisplayed();
+    }
 
-        return this;
+    waitForLambdaDialogHidden() {
+        const lambdaDialog = $(this.selectorLambdaDialog);
+
+        return lambdaDialog.waitForDisplayed(undefined, true);
     }
 
     isLambdaDialogDisplayed() {
         const lambdaDialog = $(this.selectorLambdaDialog);
 
-        lambdaDialog.waitForDisplayed();
-
         return lambdaDialog.isDisplayed();
+    }
+
+    waitForOutputBoxCleared() {
+        const outputBox = $(this.selectorOutputBox);
+
+        outputBox.waitForDisplayed();
+
+        browser.waitUntil(() => outputBox.getValue() === '');
     }
 
     isOutputBoxCleared() {
@@ -37,6 +55,53 @@ class HomePage extends Page {
         outputBox.waitForDisplayed();
 
         return outputBox.getValue() === '';
+    }
+
+    waitForOutputBoxContent() {
+        const outputBox = $(this.selectorOutputBox);
+
+        browser.waitUntil(() => outputBox.getValue() !== '');
+    }
+
+    getOutputBoxContent() {
+        const outputBox = $(this.selectorOutputBox);
+
+        return outputBox.getValue();
+    }
+
+    getButton(buttonName) {
+        const buttonMap = [
+            {
+                name: 'Open Lambda Test Dialog',
+                ButtonClass: OpenDialogButton
+            },
+            {
+                name: 'Node Hello Lambda',
+                ButtonClass: HelloNodeButton
+            },
+            {
+                name: 'Python Hello Lambda',
+                ButtonClass: HelloPythonButton
+            },
+            {
+                name: 'Node Lottery Lambda',
+                ButtonClass: LotteryNodeButton
+            },
+            {
+                name: 'Clear Ouput',
+                ButtonClass: ClearOutputButton
+            },
+            {
+                name: 'Lambda Dialog Close',
+                ButtonClass: DialogCloseButton
+            }
+        ];
+
+        const ButtonClass = buttonMap.find(b => b.name === buttonName).ButtonClass;
+
+        if (!ButtonClass) throw new Error(`Invalid button name passed: ${buttonName}`);
+
+        return new ButtonClass();
     }
 }
 
