@@ -26,13 +26,17 @@ class HomePage extends Page {
     waitForLambdaDialogDisplayed() {
         const lambdaDialog = $(this.selectorLambdaDialog);
 
-        return lambdaDialog.waitForDisplayed();
+        lambdaDialog.waitForDisplayed();
+
+        return this;
     }
 
     waitForLambdaDialogHidden() {
         const lambdaDialog = $(this.selectorLambdaDialog);
 
-        return lambdaDialog.waitForDisplayed(undefined, true);
+        lambdaDialog.waitForDisplayed(undefined, true);
+
+        return this;
     }
 
     isLambdaDialogDisplayed() {
@@ -47,6 +51,8 @@ class HomePage extends Page {
         outputBox.waitForDisplayed();
 
         browser.waitUntil(() => outputBox.getValue() === '');
+
+        return this;
     }
 
     isOutputBoxCleared() {
@@ -61,6 +67,8 @@ class HomePage extends Page {
         const outputBox = $(this.selectorOutputBox);
 
         browser.waitUntil(() => outputBox.getValue() !== '');
+
+        return this;
     }
 
     getOutputBoxContent() {

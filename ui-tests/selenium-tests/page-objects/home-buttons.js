@@ -6,11 +6,13 @@ class Button {
     click() {
         const button = $(this.selector);
 
+        button.waitForExist();
         button.waitForDisplayed();
+        button.waitForEnabled();
 
         button.click();
 
-        // TODO: remove in favor of wait-until constructs
+        // TODO: not sure why click sometimes fails without this short pause
         browser.pause();
     }
 }

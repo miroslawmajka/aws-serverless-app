@@ -10,6 +10,9 @@ Given(/^I open the base URL$/, function () {
 });
 
 When(/^I click the "([^"]*)" button$/, function (buttonName) {
+    /**
+     * @type HomePage
+     */
     const homePage = this.scenarioContext.currentPage;
 
     homePage.getButton(buttonName).click();
@@ -18,6 +21,9 @@ When(/^I click the "([^"]*)" button$/, function (buttonName) {
 Then(/^The lambda dialog is "(displayed|hidden)"$/, function (displayedOrHidden) {
     const shouldBeDisplayed = displayedOrHidden === 'displayed';
 
+    /**
+     * @type HomePage
+     */
     const homePage = this.scenarioContext.currentPage;
 
     if (shouldBeDisplayed) {
@@ -32,7 +38,10 @@ Then(/^The lambda dialog is "(displayed|hidden)"$/, function (displayedOrHidden)
 });
 
 Then(/^The output box is cleared$/, function () {
-    const homePage = new HomePage();
+    /**
+     * @type HomePage
+     */
+    const homePage = this.scenarioContext.currentPage;
 
     homePage.waitForOutputBoxCleared();
 
@@ -40,7 +49,10 @@ Then(/^The output box is cleared$/, function () {
 });
 
 Then(/^The output from the call is displayed$/, function () {
-    const homePage = new HomePage();
+    /**
+     * @type HomePage
+     */
+    const homePage = this.scenarioContext.currentPage;
 
     homePage.waitForOutputBoxContent();
 
@@ -52,6 +64,9 @@ Then(/^The output from the call is displayed$/, function () {
 });
 
 Then(/^The output box shows "([^"]*)"$/, function (expectedContent) {
+    /**
+     * @type HomePage
+     */
     const homePage = this.scenarioContext.currentPage;
 
     const actualContent = homePage.getOutputBoxContent();
