@@ -1,18 +1,17 @@
-const chai = require('chai');
-const should = chai.should();
+const expect = require('chai').expect;
 
 const subject = require('../index');
 
 describe('When I call lambda handlers', function () {
-    it('Then I get a hello mesage from the hello handler', function () {
-        const actual = subject.helloHandler();
+    it('Then I get a hello mesage from the hello handler', async function () {
+        const actual = await subject.helloHandler();
 
-        should.exist(actual);
+        expect(actual).to.be.an('object');
     });
 
-    it('Then I get numbers from the lottery handler', function () {
-        const actual = subject.lotteryHandler();
+    it('Then I get numbers from the lottery handler', async function () {
+        const actual = await subject.lotteryHandler();
 
-        should.exist(actual);
+        expect(actual).to.be.an('object');
     });
 });

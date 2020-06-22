@@ -29,9 +29,7 @@ const wdioConfig = {
     baseUrl: WEBSITE_URL,
     logLevel: 'warn',
     before: () => {
-        const chai = require('chai');
-
-        global.should = chai.should();
+        global.expect = require('chai').expect;
     },
     onComplete: exitCode => {
         console.log(`All WebdriverIO workers complete with "${exitCode}" exit code`);

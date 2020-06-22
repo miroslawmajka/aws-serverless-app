@@ -1,7 +1,6 @@
 const { Given, Then, When } = require('cucumber');
 
 const HomePage = require('../../page-objects/home-page');
-const { expect } = require('chai');
 
 Given(/^I open the base URL$/, function () {
     const homePage = new HomePage();

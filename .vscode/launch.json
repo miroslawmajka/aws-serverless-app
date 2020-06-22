@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Lambda Unit Tests",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "mocha"
+            ],
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/lambda-src/node",
+            "type": "pwa-node"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Selenium Tests",

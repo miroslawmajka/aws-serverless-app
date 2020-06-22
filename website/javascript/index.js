@@ -102,14 +102,16 @@ function handleApiClick(endpoint) {
     pSpinner.show();
 
     $.get(`${_config.apiUrl}/${endpoint}`, data => {
-        setOutput(data.message);
+        const message = data.message.text ? data.message.text : data.message;
+
+        setOutput(message);
 
         pSpinner.hide();
     });
 }
 
-function setOutput(text) {
+function setOutput(message) {
     const txtLambdaOuput = $('#txtLambdaOuput');
 
-    txtLambdaOuput.val(text || '');
+    txtLambdaOuput.val(message || '');
 }
