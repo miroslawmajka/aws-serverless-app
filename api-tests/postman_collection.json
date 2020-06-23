@@ -18,10 +18,10 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"    pm.response.to.have.header(\"Content-Type\");    \r",
 							"});\r",
 							"\r",
-							"pm.test(\"Body is correct\", function () {\r",
+							"pm.test(\"Response body contains hello message\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.success).to.eql(true);\r",
 							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Node!\");\r",
@@ -62,9 +62,27 @@
 							"    pm.response.to.have.header(\"Content-Type\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Body is correct\", function () {\r",
+							"pm.test(\"Response body contains lottery numbers\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.own.property('success');\r",
+							"    pm.expect(jsonData).to.have.own.property('message');\r",
+							"\r",
 							"    pm.expect(jsonData.success).to.eql(true);\r",
+							"    \r",
+							"    pm.expect(jsonData.message).to.have.own.property('text');    \r",
+							"    pm.expect(jsonData.message.text).to.be.a('string');\r",
+							"\r",
+							"    pm.expect(jsonData.message).to.have.own.property('numbers');    \r",
+							"    pm.expect(jsonData.message.numbers).to.be.an('array');\r",
+							"\r",
+							"    jsonData.message.numbers.forEach(n => {\r",
+							"        pm.expect(n).to.be.a('number');\r",
+							"    });\r",
+							"\r",
+							"    var numbers = jsonData.message.numbers;\r",
+							"    var expectedText = `${numbers.slice(0, 5).join(' ')} [${numbers[5]}]`;\r",
+							"\r",
+							"    pm.expect(jsonData.message.text).to.eql(expectedText);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -75,12 +93,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{apiUrl}}/hello-node",
+					"raw": "{{apiUrl}}/lottery-node",
 					"host": [
 						"{{apiUrl}}"
 					],
 					"path": [
-						"hello-node"
+						"lottery-node"
 					]
 				}
 			},
@@ -102,7 +120,7 @@
 							"    pm.response.to.have.header(\"Content-Type\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Body is correct\", function () {\r",
+							"pm.test(\"Response body contains hello message\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.success).to.eql(true);\r",
 							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Python!\");\r",

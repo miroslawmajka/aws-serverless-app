@@ -16,9 +16,8 @@ Feature: AWS Serverless App Lambda Dialog
     Then The output from the call is displayed
     Then The output box shows "Hello from Lambda Python!"
 
-    # TODO
-    # When I click the "Node Lottery Lambda" button
-    # Then The output from the call is displayed
+    When I click the "Node Lottery Lambda" button
+    Then The output from the call is displayed
 
     When I click the "Clear Ouput" button
     Then The output box is cleared
@@ -44,4 +43,4 @@ Feature: AWS Serverless App Lambda Dialog
       | buttonName          |
       | Node Hello Lambda   |
       | Python Hello Lambda |
-# | Node Lottery Lambda |
+      | Node Lottery Lambda |

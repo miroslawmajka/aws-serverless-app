@@ -2,12 +2,9 @@
 
 Objectives to achieve before making the project public
 
--   lottery Node function
-    -   postman test
-    -   selenium test
 -   cypress tests
     -   SPIKE run in pipelines
     -   new job as part of the test stage
--   Postman online documentation with link
+-   Postman online documentation with links
 -   README updates for all subprojects
 -   making the DevOps project public but with read-only access
