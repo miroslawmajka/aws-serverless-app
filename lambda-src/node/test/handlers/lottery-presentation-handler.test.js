@@ -4,6 +4,7 @@ const subject = require('../../lib/handlers/lottery-presentation-handler');
 
 describe('When I call the lottery presendation handler', function () {
     it('Then I get an object with te numbers and a text representing them', function () {
+        // TODO: add sinon mock to inject a lottery-numbers-handler which returns expected numbers
         const actual = subject.handle();
 
         expect(actual).to.be.an('object');
