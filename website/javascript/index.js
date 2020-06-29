@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 // Side navigation
 function w3_open() {
-    var x = document.getElementById('mySidebar');
+    let x = document.getElementById('mySidebar');
     x.style.width = '100%';
     x.style.fontSize = '40px';
     x.style.paddingTop = '10%';
@@ -12,12 +14,12 @@ function w3_close() {
 
 // Tabs
 function openCity(evt, cityName) {
-    var i;
-    var x = document.getElementsByClassName('city');
+    let i;
+    let x = document.getElementsByClassName('city');
     for (i = 0; i < x.length; i++) {
         x[i].style.display = 'none';
     }
-    var activebtn = document.getElementsByClassName('testbtn');
+    let activebtn = document.getElementsByClassName('testbtn');
     for (i = 0; i < x.length; i++) {
         activebtn[i].className = activebtn[i].className.replace(' w3-dark-grey', '');
     }
@@ -25,12 +27,12 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += ' w3-dark-grey';
 }
 
-var mybtn = document.getElementsByClassName('testbtn')[0];
+let mybtn = document.getElementsByClassName('testbtn')[0];
 mybtn.click();
 
 // Accordions
 function myAccFunc(id) {
-    var x = document.getElementById(id);
+    let x = document.getElementById(id);
     if (x.className.indexOf('w3-show') == -1) {
         x.className += ' w3-show';
     } else {
@@ -39,7 +41,7 @@ function myAccFunc(id) {
 }
 
 // Slideshows
-var slideIndex = 1;
+let slideIndex = 1;
 
 function plusDivs(n) {
     slideIndex = slideIndex + n;
@@ -47,7 +49,7 @@ function plusDivs(n) {
 }
 
 function showDivs(n) {
-    var x = document.getElementsByClassName('mySlides');
+    let x = document.getElementsByClassName('mySlides');
     if (n > x.length) {
         slideIndex = 1;
     }
@@ -64,16 +66,16 @@ showDivs(1);
 
 // Progress Bars
 function move() {
-    var elem = document.getElementById('myBar');
-    var width = 5;
-    var id = setInterval(frame, 10);
+    let elem = document.getElementById('myBar');
+    let width = 5;
+    let id = setInterval(frame, 10);
     function frame() {
         if (width == 100) {
             clearInterval(id);
         } else {
             width++;
-            elem.style.width = width + '%';
-            elem.innerHTML = width * 1 + '%';
+            elem.style.width = `${width}%`;
+            elem.innerHTML = `${width * 1}%`;
         }
     }
 }

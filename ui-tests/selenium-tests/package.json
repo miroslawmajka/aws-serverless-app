@@ -12,7 +12,6 @@
         "chromedriver"
     ],
     "scripts": {
-        "lint": "eslint --color .",
         "test": "wdio wdio.conf.js"
     },
     "devDependencies": {
@@ -26,7 +25,6 @@
         "chromedriver": "^83.0.0",
         "cucumber": "^5.1.0",
         "dotenv": "^8.2.0",
-        "eslint": "^6.8.0",
         "moment": "^2.27.0",
         "wdio-chromedriver-service": "^5.0.2",
         "webdriverio": "^5.23.0"

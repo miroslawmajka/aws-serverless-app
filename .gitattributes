@@ -1,4 +1,3 @@
 *.json text eol=lf
 *.sh text eol=lf
-.eslintrc.js text eol=lf
-jquery-*.min.js eol=lf
+*.min.js eol=lf

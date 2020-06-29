@@ -10,16 +10,14 @@
         "aws"
     ],
     "scripts": {
-        "lint": "eslint --color .",
         "mocha": "mocha --recursive test",
         "mocha-junit": "mocha --recursive test -R mocha-junit-reporter --reporter-options mochaFile=test-results/junit.xml",
         "nyc": "nyc --reporter=cobertura npm run mocha-junit",
         "coverage": "nyc report && nyc report --reporter=text-summary",
-        "test": "npm run lint && npm run nyc && npm run coverage"
+        "test": "npm run nyc && npm run coverage"
     },
     "devDependencies": {
         "chai": "^4.2.0",
-        "eslint": "^7.1.0",
         "mocha": "^7.2.0",
         "mocha-junit-reporter": "^1.23.3",
         "nyc": "^15.1.0"

@@ -1,3 +1,4 @@
 jobs:
+- template: job-lint-javascript.yml
 - template: job-build-lambda-node-functions.yml
 - template: job-build-lambda-python-functions.yml

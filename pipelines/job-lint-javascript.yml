@@ -1,0 +1,33 @@
+jobs:
+- job: LintJavaScript
+  displayName: Lint JavaScript
+
+  variables:
+  - name: LINT_RESULTS_ARTIFACT
+    value: lint-results-$(Build.BuildNumber)
+  - name: TEST_RESULTS
+    value: $(TEST_RESULTS_PATH)
+
+  steps:
+  - template: step-install-node.yml
+  
+  - script: npm install
+    displayName: Restore npm modules
+  
+  - script: npm test
+    displayName: Run ESLInt
+
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    displayName: Publish linting results
+    inputs:
+      testRunTitle: ESLint Results
+      testResultsFormat: JUnit
+      testResultsFiles: $(TEST_RESULTS)
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    displayName: Publish $(LINT_RESULTS_ARTIFACT) artifact
+    inputs:
+      pathToPublish: $(TEST_RESULTS)
+      ArtifactName: $(LINT_RESULTS_ARTIFACT)
