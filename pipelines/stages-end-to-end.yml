@@ -21,6 +21,7 @@ stages:
 
 - stage: AwsCleanup
   displayName: AWS Cleanup
-  condition: always()
+  # The pipeline has moved on beyond BuildLambdaFunctions so potentially AWS infrastructure has been built
+  condition: succeeded("BuildLambdaFunctions")
   jobs:
   - template: job-destroy-aws-infrastructure.yml

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-
+var mirek = 1; // Rogoue JS line
 // Side navigation
 function w3_open() {
     let x = document.getElementById('mySidebar');
