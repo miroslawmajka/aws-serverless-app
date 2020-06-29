@@ -9,7 +9,8 @@
     "author": "Miroslaw Majka",
     "license": "MIT",
     "scripts": {
-        "open": "cypress open"
+        "test": "cypress run -s cypress/integration/sut/lambda.spec.js",
+        "start": "cypress open"
     },
     "devDependencies": {
         "cypress": "^4.9.0"

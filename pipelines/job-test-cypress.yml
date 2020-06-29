@@ -11,5 +11,14 @@ jobs:
   steps:
   - template: step-install-node.yml
 
-  # TODO: research and run tests here
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      artifactName: $(TF_ARTIFACT_NAME)
+    displayName: Download Terraform output artifact
+
+  - script: npm install
+    workingDirectory: $(UI_TESTS_PATH)
+    displayName: Restore npm modules
+
+  # TODO: run tests and collect results
   

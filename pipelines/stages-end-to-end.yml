@@ -1,13 +1,13 @@
 stages:
-- stage: BuildLambdaFunctions
-  displayName: Build Lambda Functions
+- stage: BuildApp
+  displayName: Build App
   jobs:
-  - template: jobs-build-lambda-functions.yml
+  - template: jobs-build-app.yml
 
-- stage: SetupAwsInfrastrcture
-  displayName: Setup AWS Infrastrcture
+- stage: AwsSetup
+  displayName: AWS Setup
   jobs:
-  - template: job-build-aws-infrastructure.yml
+  - template: job-aws-setup.yml
       
 - stage: DeployApp
   displayName: Deploy App
@@ -21,7 +21,7 @@ stages:
 
 - stage: AwsCleanup
   displayName: AWS Cleanup
-  # The pipeline has moved on beyond BuildLambdaFunctions so potentially AWS infrastructure has been built
-  condition: succeeded('BuildLambdaFunctions')
+  # The pipeline has moved on beyond BuildApp so potentially AWS infrastructure has been built
+  condition: succeeded('BuildApp')
   jobs:
-  - template: job-destroy-aws-infrastructure.yml
+  - template: job-aws-destroy.yml
