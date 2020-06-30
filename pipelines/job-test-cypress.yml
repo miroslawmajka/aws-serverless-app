@@ -20,9 +20,10 @@ jobs:
     workingDirectory: $(UI_TESTS_PATH)
     displayName: Restore npm modules
 
+  # TODO: fix the JSON creation based on env vars
   - script: |  
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
-      echo '{"WEBSITE_URL":"${WEBSITE_URL}"}' > cypress.env.json
+      printf '{"WEBSITE_URL":"%s"}' $WEBSITE_URL > cypress.env.json
       npm test
     workingDirectory: $(UI_TESTS_PATH)
     displayName: Run Cypress tests

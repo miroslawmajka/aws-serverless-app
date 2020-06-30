@@ -144,4 +144,4 @@ selenium-output
 # Cypress
 cypress.env.json
 **/videos/*.mp4
-**/screenshots/*
+**/screenshots/*.png
