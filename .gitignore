@@ -140,3 +140,8 @@ test-results
 
 # Selenium screenshots, page sources and logs
 selenium-output
+
+# Cypress
+cypress.env.json
+**/videos/*.mp4
+**/screenshots/*

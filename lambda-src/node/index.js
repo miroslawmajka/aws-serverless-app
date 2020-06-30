@@ -2,8 +2,8 @@
  * Entry point for all Node Lambda handlers
  */
 
-const lotteryPresentationHandler = require('./lib/handlers/lottery-presentation-handler');
-
+const LotteryPresentation = require('./lib/handlers/lottery-presentation-handler');
+const LotteryNumbers = require('./lib/handlers/lottery-numbers-handler');
 const LambdaResponse = require('./lib/model/lambda-response');
 
 async function helloHandler() {
@@ -11,7 +11,13 @@ async function helloHandler() {
 }
 
 async function lotteryHandler() {
-    return new LambdaResponse(lotteryPresentationHandler.handle());
+    const lotteryNumbers = new LotteryNumbers();
+    const lotteryPresentation = new LotteryPresentation();
+
+    const numbers = lotteryNumbers.handle();
+    const response = lotteryPresentation.handle(numbers);
+
+    return new LambdaResponse(response);
 }
 
 exports.helloHandler = helloHandler;

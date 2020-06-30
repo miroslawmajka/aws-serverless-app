@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 
-const subject = require('../../lib/handlers/lottery-numbers-handler');
+const SubjectClass = require('../../lib/handlers/lottery-numbers-handler');
+
+const subject = new SubjectClass();
 
 const LOTTERY_ITERATIONS = 100;
 

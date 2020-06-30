@@ -20,5 +20,27 @@ jobs:
     workingDirectory: $(UI_TESTS_PATH)
     displayName: Restore npm modules
 
-  # TODO: run tests and collect results
+  - script: |  
+      source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      echo '{"WEBSITE_URL":"${WEBSITE_URL}"}' > cypress.env.json
+      npm test
+    workingDirectory: $(UI_TESTS_PATH)
+    displayName: Run Cypress tests
+
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testRunTitle: Cypress Tets Results
+      testResultsFormat: JUnit
+      testResultsFiles: $(UI_TESTS_PATH)/test-results/*.xml
+    displayName: Publish test results
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    inputs:
+      pathToPublish: $(UI_TESTS_PATH)/test-results
+      ArtifactName: $(CYPRESS_TEST_RESULTS_ARTIFACT)
+    displayName: Publish $(CYPRESS_TEST_RESULTS_ARTIFACT) artifact
+
+  # TODO: record screenshot and video artifacts
   

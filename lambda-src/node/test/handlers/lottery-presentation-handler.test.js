@@ -1,11 +1,14 @@
 const expect = require('chai').expect;
 
-const subject = require('../../lib/handlers/lottery-presentation-handler');
+const SubjectClass = require('../../lib/handlers/lottery-presentation-handler');
+
+const subject = new SubjectClass();
 
 describe('When I call the lottery presendation handler', function () {
     it('Then I get an object with te numbers and a text representing them', function () {
-        // TODO: add sinon mock to inject a lottery-numbers-handler which returns expected numbers
-        const actual = subject.handle();
+        const MOCK_NUMBERS = [1, 3, 5, 7, 9, 20];
+
+        const actual = subject.handle(MOCK_NUMBERS);
 
         expect(actual).to.be.an('object');
         expect(actual).to.have.property('numbers');

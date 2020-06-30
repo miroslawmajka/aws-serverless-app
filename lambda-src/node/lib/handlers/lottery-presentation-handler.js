@@ -1,13 +1,12 @@
-function handle(lotteryNumbersHandler = require('./lottery-numbers-handler')) {
-    const numbers = lotteryNumbersHandler.handle();
-    const text = `${numbers.slice(0, 5).join(' ')} [${numbers[5]}]`;
+class LotteryPresentation {
+    handle(numbers) {
+        const text = `${numbers.slice(0, 5).join(' ')} [${numbers[5]}]`;
 
-    return {
-        numbers,
-        text
-    };
+        return {
+            numbers,
+            text
+        };
+    }
 }
 
-module.exports = {
-    handle
-};
+module.exports = LotteryPresentation;
