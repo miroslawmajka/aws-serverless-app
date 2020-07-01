@@ -7,6 +7,10 @@ jobs:
     value: $(Build.SourcesDirectory)/ui-tests/cypress-tests
   - name: CYPRESS_TEST_RESULTS_ARTIFACT
     value: cypress-test-results-$(Build.BuildNumber)
+  - name: CYPRESS_SCREENSHOTS_ARTIFACT
+    value: cypress-screenshots-$(Build.BuildNumber)
+  - name: CYPRESS_VIDEOS_ARTIFACT
+    value: cypress-videos-$(Build.BuildNumber)
 
   steps:
   - template: step-install-node.yml
@@ -20,7 +24,6 @@ jobs:
     workingDirectory: $(UI_TESTS_PATH)
     displayName: Restore npm modules
 
-  # TODO: fix the JSON creation based on env vars
   - script: |  
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
       printf '{"WEBSITE_URL":"%s"}' $WEBSITE_URL > cypress.env.json
@@ -43,5 +46,17 @@ jobs:
       ArtifactName: $(CYPRESS_TEST_RESULTS_ARTIFACT)
     displayName: Publish $(CYPRESS_TEST_RESULTS_ARTIFACT) artifact
 
-  # TODO: record screenshot and video artifacts
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    inputs:
+      pathToPublish: $(UI_TESTS_PATH)/cypress/screenshots
+      ArtifactName: $(CYPRESS_SCREENSHOTS_ARTIFACT)
+    displayName: Publish $(CYPRESS_SCREENSHOTS_ARTIFACT) artifact
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    inputs:
+      pathToPublish: $(UI_TESTS_PATH)/cypress/videos
+      ArtifactName: $(CYPRESS_VIDEOS_ARTIFACT)
+    displayName: Publish $(CYPRESS_VIDEOS_ARTIFACT) artifact
   
