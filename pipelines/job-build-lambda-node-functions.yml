@@ -25,7 +25,7 @@ jobs:
     condition: succeededOrFailed()
     displayName: Publish unit test results
     inputs:
-      testRunTitle: Node Unit Tets Results
+      testRunTitle: Node Unit Test Results
       testResultsFormat: JUnit
       testResultsFiles: $(TEST_RESULTS)
 

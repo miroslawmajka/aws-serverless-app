@@ -33,7 +33,7 @@ jobs:
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
-      testRunTitle: Selenium Tets Results
+      testRunTitle: Selenium Test Results
       testResultsFormat: JUnit
       testResultsFiles: $(UI_TESTS_PATH)/test-results/*.xml
     displayName: Publish test results

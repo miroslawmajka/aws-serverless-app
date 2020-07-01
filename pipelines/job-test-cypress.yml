@@ -34,7 +34,7 @@ jobs:
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
-      testRunTitle: Cypress Tets Results
+      testRunTitle: Cypress Test Results
       testResultsFormat: JUnit
       testResultsFiles: $(UI_TESTS_PATH)/test-results/*.xml
     displayName: Publish test results
@@ -49,14 +49,14 @@ jobs:
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
-      pathToPublish: $(UI_TESTS_PATH)/cypress/screenshots
-      ArtifactName: $(CYPRESS_SCREENSHOTS_ARTIFACT)
-    displayName: Publish $(CYPRESS_SCREENSHOTS_ARTIFACT) artifact
-
-  - task: PublishBuildArtifacts@1
-    condition: succeededOrFailed()
-    inputs:
       pathToPublish: $(UI_TESTS_PATH)/cypress/videos
       ArtifactName: $(CYPRESS_VIDEOS_ARTIFACT)
     displayName: Publish $(CYPRESS_VIDEOS_ARTIFACT) artifact
+
+  - task: PublishBuildArtifacts@1
+    condition: failed()
+    inputs:
+      pathToPublish: $(UI_TESTS_PATH)/cypress/screenshots
+      ArtifactName: $(CYPRESS_SCREENSHOTS_ARTIFACT)
+    displayName: Publish $(CYPRESS_SCREENSHOTS_ARTIFACT) artifact
   
