@@ -1,7 +1,8 @@
 # Production CD pipeline which DOES NOT destroy the AWS environment
 trigger: none
 
-name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
+# NOTE: only lowercase alphanumeric characters and hyphens allowed in S3 bucket name
+name: $(SourceBranchName)-$(BuildID)-$(Rev:r)-$(Date:yyyy-MM-dd)
 
 pool:
   vmImage: 'ubuntu-latest'
