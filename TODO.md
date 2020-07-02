@@ -1,7 +1,6 @@
 # TODO
 
 -   Postman online documentation with links in the README to it
--   Cypress tests
 -   README updates for all subprojects (HOWTOs)
 -   making the GitHub public
 -   making the DevOps project public but with read-only access

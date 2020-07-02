@@ -1,4 +1,4 @@
-# Test pipeline not intended for CI/CD
+# Production CD pipeline which DOES NOT destroy the AWS environment
 trigger: none
 
 name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
@@ -9,7 +9,7 @@ pool:
 variables:
 - group: AwsCredentials
 - name: ENVIRONMENT_NAME
-  value: dynamic-$(Build.BuildNumber)
+  value: default
 - name: TEST_RESULTS_PATH
   value: test-results/junit.xml
 - name: DOTENV_FILE
@@ -39,4 +39,3 @@ variables:
 
 stages:
 - template: stages-build-test-deploy.yml
-- template: stages-destroy.yml

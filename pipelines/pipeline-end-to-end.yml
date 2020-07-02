@@ -1,5 +1,6 @@
-# Test pipeline not intended for CI/CD
-trigger: none
+# Typical CI pipeline that tests the application end-to-end
+trigger: 
+- master
 
 name: $(SourceBranchName)-$(BuildID)-$(Rev:r)_$(Date:yyyy-MM-dd)
 
