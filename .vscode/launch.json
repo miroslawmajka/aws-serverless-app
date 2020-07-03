@@ -2,12 +2,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Lambda Unit Tests",
+            "name": "Node Lambda Unit Tests",
             "request": "launch",
-            "runtimeArgs": [
-                "run",
-                "mocha"
-            ],
+            "runtimeArgs": ["run", "mocha"],
             "runtimeExecutable": "npm",
             "cwd": "${workspaceFolder}/lambda-src/node",
             "type": "pwa-node"

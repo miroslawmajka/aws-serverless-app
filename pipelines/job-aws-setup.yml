@@ -7,6 +7,9 @@ jobs:
 
   - script: |    
       sh tf-apply.sh $(ENVIRONMENT_NAME) ${TF_BACKEND_CONFIG_NAME} $(DOTENV_FILE)
+      
+      if [[ $? != 0 ]]; then exit 1; fi
+
       mkdir -p $(TF_ARTIFACT_PATH)
       cp $(DOTENV_FILE) $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
     displayName: Create $(ENVIRONMENT_NAME) environment

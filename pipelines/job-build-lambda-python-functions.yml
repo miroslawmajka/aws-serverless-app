@@ -7,7 +7,10 @@ jobs:
     value: $(Build.SourcesDirectory)/lambda-src/python
 
   steps:  
-  - script: sh create-python-lambda-artifact.sh $(LAMBDA_PYTHON_FUNCTIONS_ZIP)
+  - script: |
+      sh create-python-lambda-artifact.sh $(LAMBDA_PYTHON_FUNCTIONS_ZIP)
+      
+      if [[ $? != 0 ]]; then exit 1; fi
     workingDirectory: $(PYTHON_CODE_PATH)
     displayName: Create $(LAMBDA_PYTHON_FUNCTIONS_ZIP) artifact
 

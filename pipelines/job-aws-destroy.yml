@@ -6,7 +6,12 @@ jobs:
 
   - script: |    
       sh tf-destroy.sh $(ENVIRONMENT_NAME) ${TF_BACKEND_CONFIG_NAME}
+      
+      if [[ $? != 0 ]]; then exit 1; fi
+      
       sh tf-delete-workspace.sh $(ENVIRONMENT_NAME)
+      
+      if [[ $? != 0 ]]; then exit 1; fi
     displayName: Destroy $(ENVIRONMENT_NAME) environment
     workingDirectory: terraform
     env: 

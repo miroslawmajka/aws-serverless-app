@@ -11,8 +11,12 @@ jobs:
 
   - script: |
       source $(TF_ARTIFACT_PATH)/$(TF_OUTPUT_VARS)
+      
       echo "Deploying $WEBSITE_URL website..."  
+
       sh deploy-website.sh $WEBSITE_BUCKET_NAME $API_URL $(ENVIRONMENT_NAME)
+      
+      if [[ $? != 0 ]]; then exit 1; fi
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)
       AWS_SECRET_ACCESS_KEY: $(aws_secret_access_key)
