@@ -18,7 +18,7 @@ jobs:
     workingDirectory: $(NODE_CODE_PATH)
   
   - script: npm test
-    displayName: Run linting unit tests coverage
+    displayName: Run mocha tests
     workingDirectory: $(NODE_CODE_PATH)
 
   - task: PublishTestResults@2
