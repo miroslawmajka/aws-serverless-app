@@ -2,6 +2,7 @@ stages:
 - stage: AwsCleanup
   displayName: AWS Cleanup
   # The pipeline has moved on beyond BuildApp so potentially AWS infrastructure has been built
-  condition: succeeded('BuildApp')
+  # Only cleanup when the test stage is passed in case we need to re-run it or diagnose the environment
+  condition: and(succeeded('BuildApp'), succeeded('TestApp'))
   jobs:
   - template: job-aws-destroy.yml
