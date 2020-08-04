@@ -10,13 +10,14 @@ This project has been inspired by the [AWS Serverless Web App Tutorial](https://
 
 ## Table of Contents
 
--   [Azure DevOps Pipelines](pipelines/README.md)
--   [Terraform IaC](terraform/README.md)
--   [Lambda Functions](lambda-src/README.md)
--   [API Tests](api-tests/README.md)
--   [UI Tests](ui-tests/README.md)
 -   [Default Environment](#default-environment)
 -   [Application Website](#application-website)
+-   Specific README File
+    -   [Azure DevOps Pipelines README](pipelines/README.md)
+    -   [Infrastructure as Code (Terraform) README](terraform/README.md)
+    -   [Lambda Functions README](lambda-src/README.md)
+    -   [API Tests README](api-tests/README.md)
+    -   [UI Tests README](ui-tests/README.md)
 
 ## Default Environment
 

@@ -1,4 +1,4 @@
-# Infrastructure as Code
+# Infrastructure as Code (Terraform)
 
 ## AWS
 
