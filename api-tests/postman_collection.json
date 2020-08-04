@@ -1,7 +1,8 @@
 {
 	"info": {
 		"_postman_id": "dac02736-3948-4cf0-93e7-43992f5f43b1",
-		"name": "AwsServerlessAppApi",
+		"name": "AWS Serverless App API",
+		"description": "This API collection is used for running automated CI tests against the AWS Serverless App API.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -42,9 +43,146 @@
 					"path": [
 						"hello-node"
 					]
-				}
+				},
+				"description": "Simple \"hello world\" enpoint that runs Node.js code and returns the message when called."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Node Hello",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hello-node",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hello-node"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Hello from Lambda Node!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Python Hello",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db563a14-f3c1-43a5-a262-b5893073a23f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains hello message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).to.eql(true);\r",
+							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Python!\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/hello-python",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"hello-python"
+					]
+				},
+				"description": "Simple \"hello world\" enpoint that runs Python code and returns the message when called."
+			},
+			"response": [
+				{
+					"name": "Python Hello",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/hello-python",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"hello-python"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 04 Aug 2020 20:14:15 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "6533d3d1-d212-4afb-a97c-d73ceb1e35f1"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "QwsvqGaNDoEF-bg="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-5f29c197-d188c1a83a1d85a4d5434ea4;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 c8af64e6cd4225d75ce8f5c40c654b89.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "LHR62-C2"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "UWP9xRoBnA0bDcDLUVq1wgUZ-jmMpaVkKN8RKQkRHfMyJs-MEW9HaQ=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Hello from Lambda Python!\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Node Lottery",
@@ -100,51 +238,104 @@
 					"path": [
 						"lottery-node"
 					]
-				}
+				},
+				"description": "Node.js code endpoitn that returns random lottery numbers. Inspired by the Britsh Nationa Lottery \"Set or Life\" game."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Node Lottery",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/lottery-node",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"lottery-node"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "83"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 04 Aug 2020 20:14:40 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "88bf13a4-81c3-4da5-8625-9c4faa19af9a"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "QwsziEP9joEFUBw="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-5f29c1b0-70116bbb62647e4ae3ea008c;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 c8af64e6cd4225d75ce8f5c40c654b89.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "LHR62-C2"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "fZUt_Bkjakf5OpFc0eiO7dyEwIr2FN-RBzRyKxF3NPlMhFY_8szh4A=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": {\n        \"numbers\": [\n            1,\n            4,\n            14,\n            20,\n            46,\n            10\n        ],\n        \"text\": \"1 4 14 20 46 [10]\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9917ce07-50f1-4d8e-a943-b08ed9fddd3c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Python Hello",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "db563a14-f3c1-43a5-a262-b5893073a23f",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response body contains hello message\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.success).to.eql(true);\r",
-							"    pm.expect(jsonData.message).to.eql(\"Hello from Lambda Python!\");\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{apiUrl}}/hello-python",
-					"host": [
-						"{{apiUrl}}"
-					],
-					"path": [
-						"hello-python"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"id": "1095383c-1e7a-4ae3-b821-494f9cd5d15f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -1,4 +1,18 @@
-# Using Terraform
+# Infrastructure as Code
+
+## AWS
+
+TODO
+
+## Terraform
+
+TODO
+
+### Prerequisites
+
+TODO
+
+### Running Terraform
 
 Make a copy of `aws-s3-backend.tfconfig.example` and name it `aws-s3-backend.tfconfig`.
 

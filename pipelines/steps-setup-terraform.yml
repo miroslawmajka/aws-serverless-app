@@ -4,14 +4,14 @@
     # The input value needs to be hardcoded to be authorized by the pipeline
     inputs:
       secureFile: aws-s3-backend.tfconfig 
-    displayName: Downlaod secure ${TF_BACKEND_CONFIG_NAME} file
+    displayName: Downlaod secure Terraform config file
 
   - task: DownloadSecureFile@1
     name: "tfvars"
     # The input value needs to be hardcoded to be authorized by the pipeline
     inputs:
       secureFile: terraform.tfvars
-    displayName: 'Downlaod secure terraform.tfvars file'
+    displayName: 'Downlaod secure Terraform variables file'
 
   - script: |
       cp $(tfconfig.secureFilePath) terraform/${TF_BACKEND_CONFIG_NAME}
