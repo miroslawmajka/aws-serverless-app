@@ -8,7 +8,7 @@ The author does take any responsibility for any issues resulting from using this
 
 This project has been inspired by the [AWS Serverless Web App Tutorial](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/).
 
-## Table of Contents
+**TABLE OF CONTENTS**
 
 -   [Default Environment](#default-environment)
 -   [Application Website](#application-website)
@@ -58,7 +58,7 @@ Using the [W3 Schools](https://www.w3schools.com/w3css/w3css_templates.asp) temp
 CORS is not a big problem within the dynamic environment as both the S3 static website and the Lambda functions exposed via API Gateway run off
 the Amazon main domain.
 
-When developing the project into a proper-hosted domain (e.g. "https://www.myawesomewebsite.com/) then CORS would need to be addressed as the website
+When developing the project into a proper-hosted domain (e.g. "https://www.myawesomewebsite.com/") then CORS would need to be addressed as the website
 will be running in its own domain and the API Gateway resources will be running in a separate one. Additional Terraform resources will need to be added for that.
 
 Testing CORS with jQuery in the website using **Chrome Developer Tools**:
