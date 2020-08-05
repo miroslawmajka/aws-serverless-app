@@ -10,8 +10,6 @@ jobs:
       if [[ $? != 0 ]]; then exit 1; fi
       
       sh tf-delete-workspace.sh $(ENVIRONMENT_NAME)
-      
-      if [[ $? != 0 ]]; then exit 1; fi
     displayName: Destroy $(ENVIRONMENT_NAME) environment
     workingDirectory: terraform
     env: 

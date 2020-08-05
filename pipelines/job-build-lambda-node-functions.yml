@@ -42,10 +42,7 @@ jobs:
       pathToPublish: $(TEST_RESULTS)
       ArtifactName: $(LAMBDA_NODE_TEST_RESULTS_ARTIFACT)
 
-  - script: |
-      sh create-node-lambda-artifact.sh $(LAMBDA_NODE_FUNCTIONS_ZIP)
-      
-      if [[ $? != 0 ]]; then exit 1; fi
+  - script: sh create-node-lambda-artifact.sh $(LAMBDA_NODE_FUNCTIONS_ZIP)
     workingDirectory: $(NODE_CODE_PATH)
     displayName: Create $(LAMBDA_NODE_FUNCTIONS_ZIP) artifact
 

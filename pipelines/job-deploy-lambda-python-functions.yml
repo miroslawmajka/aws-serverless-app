@@ -27,8 +27,6 @@ jobs:
       if [[ $? != 0 ]]; then exit 1; fi
       
       sh deploy-lambda-artifact.sh $LAMBDA_PYTHON_HELLO_NAME $DEPLOYMENT_BUCKET_NAME $(LAMBDA_PYTHON_FUNCTIONS_ZIP)
-      
-      if [[ $? != 0 ]]; then exit 1; fi
     displayName: Update Python Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)

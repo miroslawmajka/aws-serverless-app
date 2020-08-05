@@ -31,8 +31,6 @@ jobs:
       if [[ $? != 0 ]]; then exit 1; fi
       
       sh deploy-lambda-artifact.sh $LAMBDA_NODE_LOTTERY_NAME $DEPLOYMENT_BUCKET_NAME $(LAMBDA_NODE_FUNCTIONS_ZIP)
-      
-      if [[ $? != 0 ]]; then exit 1; fi
     displayName: Update Node Lambda functions
     env: 
       AWS_ACCESS_KEY_ID: $(aws_access_key_id)

@@ -25,10 +25,7 @@ jobs:
     workingDirectory: $(API_TESTS_PATH)
     displayName: Setup Postman environment file
 
-  - script: |
-      sh run-newman-tests.sh $(TEST_RESULTS)
-      
-      if [[ $? != 0 ]]; then exit 1; fi
+  - script: sh run-newman-tests.sh $(TEST_RESULTS)
     displayName: Run Postman colleciton using Newman
     workingDirectory: $(API_TESTS_PATH)
 
