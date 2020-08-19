@@ -23,7 +23,7 @@
 
 This is an end-to-end pipeline solution for an AWS S3 static website with serverless Lambda backend in Node and Python, Terraform IaC and deployment pipelines in Azure DevOps.
 
-The author does take any responsibility for any issues resulting from using this software. Please see the [LICENCE](LICENSE) file for details.
+The author does not take any responsibility for any issues resulting from using this software. Please see the [LICENCE](LICENSE) file for details.
 
 This project has been inspired by the [AWS Serverless Web App Tutorial](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/).
 
