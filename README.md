@@ -41,7 +41,7 @@ This is all about integrating various complementary technologies to deliver a so
 -   runs tests against that application
 -   collects the results
 -   brings that environment down keeping the costs low
--   most of all, it is about running a Web application _CHEAPLY_ when utilising the _serverless_ methodolgy (no constantly running EC2s or VMs)
+-   most of all, it is about running a Web application _CHEAPLY_ when utilising the _serverless_ methodology (no constantly running EC2s or VMs)
 
 Apart from that the solution provides a pipeline for a constantly active (i.e. "production") environment in the Cloud.
 
@@ -49,7 +49,7 @@ Apart from that the solution provides a pipeline for a constantly active (i.e. "
 
 ### What is this project NOT?
 
-You may bu surprised to see that some of the components here are too simplistic. The actual Web application is NOT the main focus here:
+You may be surprised to see that some of the components here are too simplistic. The actual Web application is NOT the main focus here:
 
 -   this is not a brilliant Web application
 -   this is not a complete Web API
